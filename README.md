@@ -30,7 +30,9 @@ IDE: `pycharm`
 
 ## 安装 🧷
   NixOS的初始化配置包含`configuration.nix`与`hardware-configuration.nix`，其中第一个是系统的全局配置，第二个是硬件相关的（主要是硬盘分区的配置）。而该项目采用模块化管理，所以`configuration.nix`的设置被分散在 **./system** 文件夹下的各个子文件，`hardware-configuration.nix`的配置放在 **./system/hardware/partition.nix** 中，移植时复制粘贴进去即可。
+  
 安装步骤：
+
 1.获取源文件
 ``` bash 
 git clone https://github.com/LFour86/nixos-lf.git
