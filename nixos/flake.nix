@@ -7,6 +7,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    #hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs =
@@ -41,15 +42,15 @@
             ./system/hardware/nvidia.nix
             ###################################################
             ###### System Configuration #######################
-            ./system/configuration/bootloader.nix
-            ./system/configuration/desktop.nix
-            ./system/configuration/environment-variables.nix 
-            ./system/configuration/layout.nix
-            ./system/configuration/misc.nix
-            ./system/configuration/powermanager.nix 
-            ./system/configuration/security.nix 
-            ./system/configuration/user.nix
-            ./system/configuration/networks.nix 
+            ./system/config/bootloader.nix
+            ./system/config/desktop.nix
+            ./system/config/environment-variables.nix 
+            ./system/config/layout.nix
+            ./system/config/misc.nix
+            ./system/config/powermanager.nix 
+            ./system/config/security.nix 
+            ./system/config/user.nix
+            ./system/config/network.nix 
             ##################################################
             ###### System Programs ###########################
             ./system/programs/programs.nix 
