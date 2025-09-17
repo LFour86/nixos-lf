@@ -6,7 +6,7 @@
 ### 整体布局
   该配置基于flake和home-manager，借助科学的模块话管理，有较高的可读性和移植性，目前只适用于64位x86平台。 ~~（不会有人用arm等架构的电脑吧）~~ 
   改配置适用于含amd iGPU和NVIDIA的电脑，也对此进行了相关优化，可以在wayland下使用NVIDIA独显或者正常nvidia offload。如果你的电脑只有amd iGPU，在`flake.nix`注释掉`nvidia.nix`即可。 ~~如果是 intel GPU就耗子尾汁吧~~
-  系统级的应用主要在**system/programs/systempkgs.nix**下，用户级的应用主要在**home/userpkgs.nix**下。
+  系统级的应用主要在**system/programs/systempkgs.nix**下，用户级的应用主要在 **home/userpkgs.nix** 下。
   办公软件采用`wpsoffice-cn`。
 ### 相关开发环境
 #### C/C++ && Embedded
@@ -25,7 +25,7 @@ IDE: `pycharm`
 此外，该配置还简单包含了rust，nodejs，go等语言的环境以及一些建模以及EDA等的工具。
 
 ## 安装 🧷
-  NixOS的初始化配置包含`configuration.nix`与`hardware-configuration.nix`，其中第一个是系统的全局配置，第二个是硬件相关的（主要是硬盘分区的配置）。而该项目采用模块化管理，所以`configuration.nix`的设置被分散在**./system**文件夹下的各个子文件，`hardware-configuration.nix`的配置放在 **./system/hardware/partition.nix** 中，移植时复制粘贴进去即可。
+  NixOS的初始化配置包含`configuration.nix`与`hardware-configuration.nix`，其中第一个是系统的全局配置，第二个是硬件相关的（主要是硬盘分区的配置）。而该项目采用模块化管理，所以`configuration.nix`的设置被分散在 **./system** 文件夹下的各个子文件，`hardware-configuration.nix`的配置放在 **./system/hardware/partition.nix** 中，移植时复制粘贴进去即可。
 安装步骤：
 1.获取源文件
 ``` bash 
