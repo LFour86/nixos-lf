@@ -6,7 +6,7 @@
 ### 整体布局
   该配置基于flake和home-manager，借助科学的模块化管理，有较高的可读性和移植性，目前只适用于64位x86平台。 ~~（不会有人用arm等架构的电脑吧）~~ 
   
-  改配置适用于含amd iGPU和NVIDIA的电脑，也对此进行了相关优化，可以在wayland下使用NVIDIA独显或者正常nvidia offload。如果你的电脑只有amd iGPU，在`flake.nix`注释掉`nvidia.nix`即可。 ~~如果是 intel GPU就耗子尾汁吧~~
+  该配置适用于含amd iGPU和NVIDIA的电脑，也对此进行了相关优化，可以在wayland下使用NVIDIA独显或者正常nvidia offload。如果你的电脑只有amd iGPU，在`flake.nix`注释掉`nvidia.nix`即可。 ~~如果是 intel GPU就耗子尾汁吧~~
   
   系统级的应用主要在**system/programs/systempkgs.nix**下，用户级的应用主要在 **home/userpkgs.nix** 下。
   
