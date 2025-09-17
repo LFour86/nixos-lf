@@ -11,11 +11,14 @@
 ### 相关开发环境
 #### C/C++ && Embedded
 IDE：`Clion` `Vscode` `arduinoIDE` `zed-editor`等
+
 工具链: `clang/clang++(llvm)` `gcc/gdb` `arm-gcc-embedded` `gnumake` `cmake` `ninja`等
+
 其他工具: `platformio` `openocd` `stm32cubemx` `stlink`等  
 
 #### Python
 IDE: `pycharm`
+
 工具链：`python3Full`
 
 #### 其他
