@@ -1,99 +1,140 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   #nixpkgs.config.segger-jlink.acceptLicense = true;
 
   # Enable nftables
-  #networking.nftables = {
-  #enable = false;
-  #ruleset = ''
-   	#table inet filter {
-     		#chain input {
-       			#type filter hook input priority 0; policy drop;
+  networking.nftables = {
+  enable = true;
+  ruleset = ''
+        table inet filter {
+          chain input {
+            type filter hook input priority 0;
 
-       			# Allow loopback traffic
-       			#iifname "lo" accept
+            # Allow Local Loopback
+            iif lo accept
 
-        		# Allow established and related connections
-          		#ct state {established, related} accept
+            # Allow Established/Related Connections
+            ct state established,related accept
 
-        		# Allow SSH, DNS, HTTP, HTTPS
-        		#tcp dport {22, 53, 80, 443} accept
-        		#udp dport {53, 67} accept
+            # Allow ICMP (Ping / IPv6 Required)
+            ip protocol icmp accept
+            ip6 nexthdr icmpv6 accept
 
-        		# Allow custom UDP ports
-        		#udp dport 4000-4007 accept
-        		#udp dport 8000-8010 accept
+            # Allow DHCP (Client Request & Server Response)
+            udp dport 67-68 accept
+            udp sport 67-68 accept
 
-			# Hotspot
-			#udp dport {67,68,53} accept
-        		#tcp dport 53 accept
+            # Allow mDNS / Avahi / Bluetooth Network Discovery
+            udp dport 5353 accept
 
-        		# Log and drop all other traffic
-        		#counter log prefix "INPUT_DROP: " group 0
-        		#drop
-     		#}
+            # Allow SSH
+            # tcp dport 22 accept
 
-   		#chain output {
-       			#type filter hook output priority 0; policy accept;
-       		#}
+            # Default Rejection
+            reject with icmpx type admin-prohibited
+          }
 
-   		#chain forward {
-       			#type filter hook forward priority 0; policy drop;
+          chain forward {
+            type filter hook forward priority 0;
 
-       			# Allow forwarding for established and related connections
-        		#ct state {established, related} accept
+            # Allow Hotspot NAT Forwarding (Wireless → Wired)
+            ct state established,related accept
+            iifname "wlo1" oifname "enp4s0" accept
+            oifname "wlo1" iifname "enp4s0" accept
 
-       			# Allow forwarding from virbr0 (KVM bridge) to external interface
-       			#iifname "virbr0" accept
+            # Default Rejection
+            reject with icmpx type admin-prohibited
+          }
 
-       			# Log and drop all other forwarded traffic
-       			#counter log prefix "FORWARD_DROP: " group 0
-       			#drop
-     		#}
-   	#}
+          chain output {
+            type filter hook output priority 0;
+            accept
+          }
+      }
 
- 	#table ip nat {
-      		#chain PREROUTING {
-        		#type nat hook prerouting priority -100; policy accept;
-        		# Add any necessary PREROUTING rules here
-       		#}
+      table ip nat {
+        chain postrouting {
+          type nat hook postrouting priority 100;
 
-    		#chain POSTROUTING {
-        		#type nat hook postrouting priority 100; policy accept;
-        		# Assuming enp4s0 is your external interface
-        		#oifname "enp4s0" masquerade
-       		#}
-   	#}
-    #'';
-  #};
+          # Perform Source Address Spoofing on Hotspot Traffic.
+          oifname "enp4s0" masquerade
+  	}
+      }
+    '';
+  };
 
   # Enable Security Services
-  #users.users.root.hashedPassword = "!";
-  #security.tpm2 = {
-    #enable = true;
-    #pkcs11.enable = true;
-    #tctiEnvironment.enable = true;
-  #};
-  #security.apparmor = {
-    #enable = true;
-    #packages = with pkgs; [
-      #apparmor-utils
-      #apparmor-profiles
-    #];
-  #};
-  #services.fail2ban.enable = true;
-  #security.pam.services.hyprlock = {};
-  #security.polkit.enable = true;
-  #programs.browserpass.enable = true;
+  security.apparmor = {
+    enable = true;
+    packages = with pkgs; [
+      apparmor-utils
+      apparmor-profiles
+    ];
+  };
+  # Gnome Desktop
+  security.polkit.enable = true;
+  
+  # Clamav: Windows File Share Protection
+  services.clamav = {
+    scanner.enable = true;
+    daemon.enable = true;
+    updater.enable = true;
+  };
+  
+  # SSH Protections
+  services.fail2ban.enable = true;
 
-  # Enable CUPS to print documents.
-  #services.printing.enable = true;
-    #services.avahi = {
-      #enable = true;
-      #nssmdns4 = true;
-   #};
+  # Prevent Memory Explosion
+  systemd.oomd.enable = true;
+  
+  # Enable Auditd (System Audit Log)
+  security.auditd.enable = true;
+
+  # Automatically Update Security Patches
+  #system.autoUpgrade = {
+    #enable = true;
+    #flake = "/etc/nixos";
+    #flags = [ "--update-input" "nixpkgs" "-L" ];
+    #dates = "daily";
+  #};
+
+  # Enable Hardware Update
+  services.fwupd.enable = true;
+
+  # Hardened Kernel Parameters (Sysctl)
+  boot.kernel.sysctl = {
+    "kernel.kptr_restrict" = 2;    # Hide kernel pointers to prevent information leakage
+    "kernel.dmesg_restrict" = 1;    # Restrict non-root users from viewing dmesg
+    "fs.suid_dumpable" = 0;    # Disable suid programs from generating core dumps
+    "kernel.unprivileged_bpf_disabled" = 1;    # Disable non-root users from using BPF to avoid privilege escalation vulnerabilities
+
+    # Network layer security
+    "net.ipv4.conf.all.rp_filter" = 1;    # Enable reverse path filtering to prevent IP spoofing
+    "net.ipv4.conf.default.rp_filter" = 1;
+    "net.ipv4.conf.all.accept_redirects" = 0;    # Disable accepting ICMP redirects
+    "net.ipv4.conf.all.send_redirects" = 0;    # Disable sending ICMP redirects
+    "net.ipv6.conf.all.accept_redirects" = 0;    # Disable IPv6 redirection
+  };
+
+  # Enable PAM Hardening
+  security.pam.loginLimits = [
+    { domain = "*"; item = "maxlogins"; type = "hard"; value = "3"; }
+  ];
+  
+  # Crypto Swap
+  #boot.initrd.luks.devices."swap" = {
+    #device = "/dev/nvme1n1p3";
+    #allowDiscards = true;
+  #};
+
+  # Enable CUPS to Print Documents.
+  services.printing.enable = true;
+    services.avahi = {
+      enable = true;
+      nssmdns4 = true;
+   };
 
   # USB Automounting
   services.gvfs.enable = true;
@@ -101,73 +142,33 @@
   services.devmon.enable = true;
 
   # Enable USB Guard
-  #services.usbguard = {
-  #  enable = true;
-  #  dbus.enable = true;
-  #  implicitPolicyTarget = "block";
+  services.usbguard = {
+    enable = false;
+    dbus.enable = false;
+    implicitPolicyTarget = "block";
     # TODO set yours pref USB devices (change {id} to your trusted USB device),
     #use "lsusb" command (from usbutils package) to get list of all connected USB devices
     #including integrated devices like camera, bluetooth, wifi, etc.
     #with their IDs or just disable `usbguard`
-  #  rules = ''
-  #        allow id 1d6b:0002 # Linux Foundation 2.0 root hub
-  #        allow id 1d6b:0003 # Linux Foundation 3.0 root hub
-  #        allow id 0bda:5411 # Realtek Semiconductor Corp. RTS5411 hub
-  #        allow id 5986:118a # Bison Electronics Inc. Integrated Camera
-  #        allow id 30fa:1701 # INSTANT USB GAMING MOUSE
-  #        allow id 048d:c102 # Integrated Technology Express, Inc. ITE Device(8910)
-        #  allow id 0489:e0cd # Foxconn / Hon Hai MediaTek Bluetooth Adapter
-        #  allow id 1d6b:0003 # Linux Foundation 3.0 root hub
-        #  allow id 0bda:0411 # Realtek Semiconductor Corp. Hub
-        #  allow id 258a:013b # Sino Wealth USB Keyboard
-        #  allow id 24a9:205a # ASolid USB
-        #  allow id 1908:0226 # GEMBIRD MicroSD Card Reader/Writer
-	#  allow id 1ea7:0064 # SHARKOON Technologies GmbH 2.4GHz Wireless rechargeable vertical mouse [More&Better]
-   # '';
-  #};
+    rules = ''
+          allow id 1d6b:0002 # Linux Foundation 2.0 root hub
+          allow id 1d6b:0003 # Linux Foundation 3.0 root hub
+          allow id 0bda:5411 # Realtek Semiconductor Corp. RTS5411 hub
+          allow id 5986:118a # Bison Electronics Inc. Integrated Camera
+          allow id 30fa:1701 # INSTANT USB GAMING MOUSE
+	  allow id 05e3:0610 # Genesys Logic, Inc. Hub
+          allow id 048d:c102 # Integrated Technology Express, Inc. ITE Device(8910)
+          allow id 0489:e0cd # Foxconn / Hon Hai MediaTek Bluetooth Adapter
+          allow id 1d6b:0003 # Linux Foundation 3.0 root hub
+          allow id 0bda:0411 # Realtek Semiconductor Corp. Hub
+	  allow id 0bda:9201 # Realtek Semiconductor Corp. Ugreen Storage Device
+          allow id 258a:013b # Sino Wealth USB Keyboard
+	  allow id 0483:572a # STMicroelectronics STM32F401 microcontroller [ARM Cortex M4] [CDC/ACM serial port]
+          allow id 24a9:205a # ASolid USB
+          allow id 1908:0226 # GEMBIRD MicroSD Card Reader/Writer
+	  allow id 1ea7:0064 # SHARKOON Technologies GmbH 2.4GHz Wireless rechargeable vertical mouse [More&Better]
+    '';
+  };
 
-  # Enable clamav scanner
-  #services.clamav = {
-   # scanner = {
-   #   enable = true;
-   #   interval = "Sat *-*-* 04:00:00";
-   #  };
-   # daemon.enable = true;
-   # fangfrisch.enable = true;
-   # fangfrisch.interval = "daily";
-   # updater.enable = true;
-   # updater.interval = "daily"; #man systemd.time
-   # updater.frequency = 12;
-  #};
-
-  #programs.firejail = {
-  #  enable = true;
-  #  wrappedBinaries = {
-  #   mpv = {
-  #     executable = "${lib.getBin pkgs.mpv}/bin/mpv";
-  #     profile = "${pkgs.firejail}/etc/firejail/mpv.profile";
-  #   };
-  #   imv = {
-  #     executable = "${lib.getBin pkgs.imv}/bin/imv";
-  #     profile = "${pkgs.firejail}/etc/firejail/imv.profile";
-  #   };
-  #  };
- #};
-
-  environment.systemPackages = with pkgs; [
-    #vulnix       #scan command: vulnix --system
-    #clamav       #scan command: sudo freshclam; clamscan [options] [file/directory/-]
-    #chkrootkit   #scan command: sudo chkrootkit
-    #pass-wayland
-    #pass2csv
-    #passExtensions.pass-tomb
-    #passExtensions.pass-update
-    #passExtensions.pass-otp
-    #passExtensions.pass-import
-    #passExtensions.pass-audit
-    #tomb
-    #pwgen
-    #pwgen-secure
-  ];
+  environment.systemPackages = with pkgs; [];
 }
-
