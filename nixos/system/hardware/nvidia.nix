@@ -33,7 +33,7 @@
     
     
   #disable nouveau
-  boot.kernelParams = [ "modprobe.blacklist=nouveau" ];
+  boot.kernelParams = [ "modprobe.blacklist=nouveau" "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
     
    #Screen Tearing Issues
    hardware.nvidia.forceFullCompositionPipeline = true;
