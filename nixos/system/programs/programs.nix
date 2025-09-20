@@ -4,22 +4,15 @@
   programs.java.enable = true;
   
   # Enable Direnv
-  programs.direnv.enable = true;
+  #programs.direnv.enable = true;
 
   # Enable Steam
   programs.steam.enable = true;
 
-  # Enable fish
-  programs.fish = {
-    enable = true;
-    shellAliases = {
-      li = "lsd --human-readable --all";
-      tt = "tree";
-      update = "cd /etc/nixos && sudo nixos-rebuild switch --flake .#lfour";
-      garbage = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
-      flake = "cd /etc/nixos && sudo nix flake update";
-    };
-  };
+  # Enable zsh
+  users.defaultUserShell = pkgs.zsh;
+  environment.shells = with pkgs; [ zsh ];
+  programs.zsh.enable = true;
 
   # Neovim
   environment.variables.EDITOR = "nvim";
@@ -40,6 +33,6 @@
   #];
 
   # Nix ld 
-  programs.nix-ld.enable = true;
+  #programs.nix-ld.enable = true;
 }
 
