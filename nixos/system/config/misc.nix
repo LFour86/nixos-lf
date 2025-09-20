@@ -3,9 +3,6 @@
   # Enable flake
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # Emulate x86 machine to enable x86 support
-  #boot.binfmt.emulatedSystems = [ "i686-linux" ];
-
   # Linux Latest Kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
