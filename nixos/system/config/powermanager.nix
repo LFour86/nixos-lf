@@ -1,11 +1,11 @@
 { ... }:
 {
   # Gnome
-  services.power-profiles-daemon.enable = false;
+  services.power-profiles-daemon.enable = true;
   
   # Tlp
   services.tlp = {
-      enable = true;
+      enable = false;
       settings = {
         TLP_DEFAULT_MODE = "BAT";
         TLP_PERSISTENT_DEFAULT = 1;
@@ -25,7 +25,7 @@
 
    #Auto-cpufreq
    services.auto-cpufreq = {
-     enable = true;
+     enable = false;
      settings = {
        battery = {
          governor = "powersave";
@@ -38,4 +38,3 @@
      };
   };
 }
-
