@@ -43,7 +43,7 @@
 
   services.mpd = {
     enable = true;
-    user = "nixos"; 
+    user = "lfour"; 
     musicDirectory = "/home/lfour/Music";
     # Optional:
     network.listenAddress = "any"; # if you want to allow non-localhost connections
