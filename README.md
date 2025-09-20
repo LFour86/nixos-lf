@@ -25,7 +25,7 @@ IDE：`Clion` `Vscode` `arduinoIDE` `zed-editor`等
 #### Python
 IDE: `pycharm`
 
-工具链：`python3Full`
+工具链：`python314`
 
 #### 其他
 此外，该配置还简单包含了rust，nodejs，go等语言的环境以及一些建模以及EDA等的工具。此外，在`systempkgs.nix`我还预设了Mathlab和Xilinx的FHS环境供安装工程软件。
