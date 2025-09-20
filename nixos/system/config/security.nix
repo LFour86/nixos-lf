@@ -126,6 +126,7 @@
   # Crypto Swap
   #boot.initrd.luks.devices."swap" = {
     #device = "/dev/nvme1n1p3";
+    #keyFile = "/dev/urandom";
     #allowDiscards = true;
   #};
 
