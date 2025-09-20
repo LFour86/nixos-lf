@@ -26,7 +26,7 @@ IDE: `pycharm`
 工具链：`python3Full`
 
 #### 其他
-此外，该配置还简单包含了rust，nodejs，go等语言的环境以及一些建模以及EDA等的工具。
+此外，该配置还简单包含了rust，nodejs，go等语言的环境以及一些建模以及EDA等的工具。此外，在`systempkgs.nix`我还预设了Mathlab和Xilinx的FHS环境供安装工程软件。
 
 ## 安装 🧷
   NixOS的初始化配置包含`configuration.nix`与`hardware-configuration.nix`，其中第一个是系统的全局配置，第二个是硬件相关的（主要是硬盘分区的配置）。而该项目采用模块化管理，所以`configuration.nix`的设置被分散在 **./system** 文件夹下的各个子文件，`hardware-configuration.nix`的配置放在 **./system/hardware/partition.nix** 中，移植时复制粘贴进去即可。
