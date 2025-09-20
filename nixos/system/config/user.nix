@@ -5,8 +5,7 @@
     isNormalUser = true;
     description = "LFour";
     extraGroups = [ "networkmanager" "wheel" "dialout"  "libvirtd" "video" "plugdev" ];
-    shell = pkgs.fish;
+    shell = pkgs.zsh;
     packages = with pkgs; [];
   };
 }
-
