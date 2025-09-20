@@ -10,11 +10,6 @@
     XMODIFIERS = "@im=fcitx";
   };
 
-    #environment.sessionVariables = {
-      #PATH = [ "/run/current-system/sw/bin" ];
-    #};
-
-    #environment.extraOutputsToInstall = [ "dev" ];
-
-    #environment.etc."bin/bash".source = "/run/current-system/sw/bin/bash";
+  # Convenient To Compile
+  environment.extraOutputsToInstall = [ "dev" ];
 }
