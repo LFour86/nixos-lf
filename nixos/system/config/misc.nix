@@ -6,8 +6,8 @@
   # Linux Latest Kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  #NixOS Development
-  environment.enableDebugInfo = true;
+  # For Development/Debugging
+  #environment.enableDebugInfo = true;
 
   # Set your time zone.
   time.timeZone = "America/New_York";
