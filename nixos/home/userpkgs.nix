@@ -2,11 +2,12 @@
 {
   home.packages = with pkgs;[
 	# Daily Applications
-	bilibili
+	#bilibili
 	element-desktop
 	google-chrome
 	firefox
 	kitty
+	llama-cpp
 	motrix
 	peazip
 	spotify
@@ -19,7 +20,7 @@
 	# Chat
 	qq
 	telegram-desktop
-	wechat-uos
+	#wechat-uos
 	wemeet
 
 	# Ventoy
@@ -33,27 +34,31 @@
 	v2rayn
 
 	# Editor
-	zed-editor
+	#zed-editor
 
 	# C/C++
-	arduino-ide
 	jetbrains.clion
 
+	# STM32
+	stm32cubemx
+
+	# Arduino/ESP32
+	arduino-ide
+	
 	# CAD
 	#kicad
 	#kicadAddons.kikit
 	
 	# Java
-	#jetbrains.idea-ultimate
+	jetbrains.idea-ultimate
 
 	# Python
 	jetbrains.pycharm-professional
 
 	# Qt
-	#qtcreator
+	qtcreator
 
 	# Game
-	#hmcl
 	melonDS
 	mgba
 	prismlauncher
