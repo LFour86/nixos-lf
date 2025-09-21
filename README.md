@@ -29,7 +29,12 @@ IDE: `pycharm`
 此外，该配置还简单包含了rust，nodejs，go等语言的环境以及一些建模以及EDA等的工具。此外，在`systempkgs.nix`我还预设了Matlab和Xilinx的FHS环境供安装工程软件。
 
 ## 安装 🧷
-  NixOS的初始化配置包含`configuration.nix`与`hardware-configuration.nix`，其中第一个是系统的全局配置，第二个是硬件相关的（主要是硬盘分区的配置）。而该项目采用模块化管理，所以`configuration.nix`的设置被分散在 **./system** 文件夹下的各个子文件，`hardware-configuration.nix`的配置放在 **./system/hardware/partition.nix** 中，移植时复制粘贴进去即可。
+  NixOS的初始化配置包含`configuration.nix`与`hardware-configuration.nix`，其中第一个是系统的全局配置，第二个是硬件相关的（主要是硬盘分区的配置）。而该项目采用模块化管理，所以`configuration.nix`的设置被分散在 **./system** 文件夹下的各个子文件。
+  
+  `hardware-configuration.nix`的配置放在 **./system/hardware/partition.nix** 中，移植时复制粘贴进去即可。
+
+  > [!WARNING]
+  > 该配置使用了 *Crypto System* 技术，如果在安装系统时没有开启这个功能，就在`security.nix`中注释掉，同理，就算开启了该功能，由于uuid不同，所以使用该配置时也应做出更改，新系统的 *boot.initrd.luks.devices* 在 **configuration.nix** 中。
   
 安装步骤：
 
@@ -40,9 +45,9 @@ git clone https://github.com/LFour86/nixos-lf.git
 2.覆盖默认配置
 ``` bash
 su
-cat /etc/nixos/hardware-configuration.nix >> nixos-lf/nixos/system/hardware/partition.nix
+cat /etc/nixos/hardware-configuration.nix >> nixos-lf/system/hardware/partition.nix
 mv /etc/nixos/configuration.nix /etc/nixos/configuration.nix.bak && mv /etc/nixos/hardware-configuration.nix /etc/nixos/hardware-configuration.nix.bak
-cp -r nixos-lf/nixos/* /etc/nixos
+cp -r nixos-lf/* /etc/nixos/
 ``` 
 3.更新系统
 ``` bash
