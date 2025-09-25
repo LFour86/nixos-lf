@@ -23,7 +23,7 @@
 
   # Chniese inputMethod
   i18n.inputMethod = {
-    enable = true; 
+    enable = true;
     type = "fcitx5";
     fcitx5.waylandFrontend = true;
     fcitx5.addons = with pkgs; [
@@ -31,13 +31,18 @@
 	fcitx5-nord
 	fcitx5-gtk
 	libpinyin
+	kdePackages.fcitx5-qt
+	kdePackages.fcitx5-unikey
+	kdePackages.fcitx5-skk-qt
+	kdePackages.fcitx5-configtool
+	kdePackages.fcitx5-with-addons
+        kdePackages.fcitx5-chinese-addons
 	fcitx5-pinyin-moegirl
     ];
   };
 
   # Packages
   environment.systemPackages = with pkgs; [
-    #libsForQt5.fcitx5-chinese-addons
+    #kdePackages.fcitx5-chinese-addons
   ];
 }
-
