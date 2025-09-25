@@ -12,9 +12,14 @@
 	wpsoffice-cn
 
 	# Chat
-	#qq
-	#wechat
-	#wemeet
+	qq
+	#wechat-uos
+	wemeet
+
+	# Pitcure editor
+	gimp
+	krita
+	inkscape
 
 	# Ventoy
 	#ventoy-full
@@ -24,7 +29,7 @@
 	clash-verge-rev
 
 	# Editor
-	#zed-editor
+	zed-editor
 
 	# C/C++
 	jetbrains.clion
@@ -57,4 +62,3 @@
 	prismlauncher
   ];
 }
-
