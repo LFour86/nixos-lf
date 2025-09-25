@@ -37,7 +37,8 @@
         sl
 	usbutils
         ###### C & C++ ################
-        cmake
+        # Default
+	cmake
         gcc_multi 
         gdb 
         gnumake
@@ -46,6 +47,53 @@
         llvmPackages_latest.libllvm
         llvmPackages_latest.libcxx
         llvmPackages_latest.clang
+	# Qt
+	kdePackages.qt3d
+	kdePackages.qtsvg
+	kdePackages.qtdoc
+	kdePackages.qt6ct
+	kdePackages.qtmqtt
+	kdePackages.qtgrpc
+	kdePackages.qtbase
+	kdePackages.qttools
+	kdePackages.qtspell
+	kdePackages.qtscxml
+	kdePackages.qt6gtk2
+	kdePackages.qtspeech
+	kdePackages.qtlottie
+	kdePackages.qtgraphs
+	kdePackages.qtcharts
+	kdePackages.qtwebview
+	kdePackages.qtwayland
+	kdePackages.qtsensors
+	kdePackages.qtquick3d
+	kdePackages.qt5compat
+	kdePackages.qtlocation
+	kdePackages.qtkeychain
+	kdePackages.qtwebengine
+	kdePackages.qtutilities
+	kdePackages.qtserialbus
+	kdePackages.qtdatavis3d
+	kdePackages.qtwebsockets
+	kdePackages.qtwebchannel
+	kdePackages.qtserialport
+	kdePackages.qtmultimedia
+	kdePackages.qthttpserver
+	kdePackages.qtshadertools
+	kdePackages.qtpositioning
+	kdePackages.qtnetworkauth
+	kdePackages.qtdeclarative
+	kdePackages.qttranslations
+	kdePackages.qtimageformats
+	kdePackages.qtconnectivity
+	kdePackages.qtremoteobjects
+	kdePackages.qtquicktimeline
+	kdePackages.qtquick3dphysics
+	kdePackages.qtpbfimageplugin
+	kdePackages.qtlanguageserver
+	kdePackages.qtvirtualkeyboard
+	kdePackages.qtquickeffectmaker
+	#
         ###### JAVA ##################
 	jre21_minimal
         zulu24
@@ -54,7 +102,7 @@
         arduino-cli 
         dotnet-sdk
         dotnet-runtime
-        #gcc-arm-embedded
+        gcc-arm-embedded
 	ninja
         openocd
         platformio
@@ -168,4 +216,3 @@
         ###### END ###################
   ];
 }
-
