@@ -1,23 +1,22 @@
 { config, pkgs, ... }:
 {
   # Gnome
-  programs.dconf.enable = true;
-  services = {
-    gnome.gnome-keyring.enable = true;
-    desktopManager.gnome.enable = true;
-    displayManager.gdm.enable = true;
-  };
-  hardware.sensor.iio.enable = true;
-  services.udev.packages = with pkgs; [ 
-    pkgs.gnome-settings-daemon
-  ];
+  #programs.dconf.enable = true;
+  #services = {
+    #gnome.gnome-keyring.enable = true;
+    #desktopManager.gnome.enable = true;
+    #displayManager.gdm.enable = true;
+  #};
+  #services.udev.packages = with pkgs; [ 
+    #pkgs.gnome-settings-daemon
+  #];
 
   # Kde
-  #services = {
-    #desktopManager.plasma6.enable = true;
-    #displayManager.sddm.enable = true;
-    #displayManager.sddm.wayland.enable = true;
-  #};
+  services = {
+    desktopManager.plasma6.enable = true;
+    displayManager.sddm.enable = true;
+  };
+
   # Colorful
   #services.colord.enable = true;
   # Location
@@ -25,36 +24,40 @@
   #programs.kdeconnect.enable = true;
   # Disk
   #programs.partition-manager.enable = true;
+  # Indusrial I/O
+  hardware.sensor.iio.enable = true;
   # Qt theme
-  qt = {
-    enable = true;
-    platformTheme = "gnome";
-    style = "adwaita-dark";
-  };
+  #qt = {
+    #enable = true;
+    #platformTheme = "gnome";
+    #style = "adwaita-dark";
+  #};
 
   environment.systemPackages = with pkgs; [ 
     # Gnome extensions
-    gnomeExtensions.applications-menu
-    gnomeExtensions.appindicator
-    gnomeExtensions.battery-health-charging
-    gnomeExtensions.bluetooth-battery-meter
-    gnomeExtensions.blur-my-shell
-    gnomeExtensions.caffeine
-    gnomeExtensions.clipboard-indicator
-    gnomeExtensions.dash-to-dock
-    gnomeExtensions.dim-background-windows
-    gnomeExtensions.dim-completed-calendar-events
-    gnomeExtensions.extension-list
-    gnomeExtensions.lockscreen-extension
-    gnomeExtensions.open-bar
-    gnomeExtensions.places-status-indicator
-    gnomeExtensions.quick-settings-audio-devices-renamer
-    gnomeExtensions.top-bar-organizer
-    gnomeExtensions.user-themes
-    gnomeExtensions.vitals
-    gnomeExtensions.workspace-indicator
+    #gnomeExtensions.applications-menu
+    #gnomeExtensions.appindicator
+    #gnomeExtensions.battery-health-charging
+    #gnomeExtensions.bluetooth-battery-meter
+    #gnomeExtensions.blur-my-shell
+    #gnomeExtensions.caffeine
+    #gnomeExtensions.clipboard-indicator
+    #gnomeExtensions.dash-to-dock
+    #gnomeExtensions.dim-background-windows
+    #gnomeExtensions.dim-completed-calendar-events
+    #gnomeExtensions.extension-list
+    #gnomeExtensions.lockscreen-extension
+    #gnomeExtensions.open-bar
+    #gnomeExtensions.places-status-indicator
+    #gnomeExtensions.quick-settings-audio-devices-renamer
+    #gnomeExtensions.top-bar-organizer
+    #gnomeExtensions.user-themes
+    #gnomeExtensions.vitals
+    #gnomeExtensions.workspace-indicator
     # Gnome windows themes
-    pkgs.adwaita-icon-theme
+    #pkgs.adwaita-icon-theme
+    #adwaita-qt
+    #adwaita-qt6
     
     # KDE
     #kdePackages.discover # Optional: Install if you use Flatpak or fwupd firmware update sevice
@@ -75,4 +78,3 @@
     #wl-clipboard # Command-line copy/paste utilities for Wayland
   ];
 }
-
