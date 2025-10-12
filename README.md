@@ -1,59 +1,126 @@
-# nixos-lf
-> [!WARNING]
-> 由于一些原因 ~~（Linux Kenel？ Nix糟糕的软连接？）~~ ，我放弃使用NixOS作为日常系统，所以配置的更新可能会暂停，但仓库会保持开放状态。
-> 
-> ~~🐱配置修改，升级及补丁可能不会及时更新到仓库，如果上游软件发生较大变动导致构建失败就不是我的错了🐱~~
+# NixOS‑LF — My NixOS Configuration
 
-## 介绍 🚀
-### 整体布局
-  该配置基于flake和home-manager，借助科学的模块化管理，有较高的可读性和移植性，目前只适用于64位x86平台。 ~~（不会有人用arm等架构的电脑吧）~~ 
-  
-  该配置适用于含amd iGPU和NVIDIA的电脑，也对此进行了相关优化，可以在wayland下使用NVIDIA独显或者正常nvidia offload。如果你的电脑只有amd iGPU，在`flake.nix`注释掉`nvidia.nix`即可。 ~~如果是 intel GPU就耗子尾汁吧~~
-  
-  系统级的应用主要在**system/programs/systempkgs.nix**下，用户级的应用主要在 **home/userpkgs.nix** 下。
-  
-  办公软件采用`wpsoffice-cn`。
-  
-### 相关开发环境
-#### C/C++ && Embedded
-IDE：`Clion` `Vscode` `arduinoIDE` `zed-editor`等
+This repository contains my personal NixOS configuration files, modules, and customizations designed to deliver a reproducible, performant, and modular NixOS setup.  
 
-工具链: `clang/clang++(llvm)` `gcc/gdb` `arm-gcc-embedded` `gnumake` `cmake` `ninja`等
+---
 
-其他工具: `platformio` `openocd` `stm32cubemx` `stlink`等  
+## 📁 Repository Layout
 
-#### Python
-IDE: `pycharm`
-
-工具链：`python314`
-
-#### 其他
-此外，该配置还简单包含了rust，nodejs，go等语言的环境以及一些建模以及EDA等的工具。此外，在`systempkgs.nix`我还预设了Matlab和Xilinx的FHS环境供安装工程软件。
-
-## 安装 🧷
-  NixOS的初始化配置包含`configuration.nix`与`hardware-configuration.nix`，其中第一个是系统的全局配置，第二个是硬件相关的（主要是硬盘分区的配置）。而该项目采用模块化管理，所以`configuration.nix`的设置被分散在 **./system** 文件夹下的各个子文件。
-  
-  `hardware-configuration.nix`的配置放在 **./system/hardware/partition.nix** 中，移植时复制粘贴进去即可。
-
-  > [!WARNING]
-  > 该配置使用了 *Crypto System* 技术，如果在安装系统时没有开启这个功能，就在`security.nix`中注释掉，同理，就算开启了该功能，由于uuid不同，所以使用该配置时也应做出更改，新系统的 *boot.initrd.luks.devices* 在 **configuration.nix** 中。
-  
-安装步骤：
-
-1.获取源文件
-``` bash 
-git clone https://github.com/LFour86/nixos-lf.git
 ```
-2.覆盖默认配置
-``` bash
-su
-cat /etc/nixos/hardware-configuration.nix >> nixos-lf/system/hardware/partition.nix
-mv /etc/nixos/configuration.nix /etc/nixos/configuration.nix.bak && mv /etc/nixos/hardware-configuration.nix /etc/nixos/hardware-configuration.nix.bak
-cp -r nixos-lf/* /etc/nixos/
-``` 
-3.更新系统
-``` bash
-cd /etc/nixos && nixos-rebuild switch --flake .#username
+nixos-lf/
+├── flake.nix
+├── modules/
+│   ├── hardware/
+│   ├── services/
+│   └── desktop/
+├── hosts/
+│   ├── laptop.nix
+│   └── home-server.nix
+├── overlays/
+│   └── my-overlays.nix
+└── README.md
 ```
-> [!NOTE]
-> 移植配置要注意用户名等配置的修改。对于国内用户，安装好系统后建议先换源再使用该配置，预计会下载三十几G的文件。
+
+- **flake.nix** — the root Nix flake entry point  
+- **modules/** — modular NixOS modules (for hardware, services, desktop configs)  
+- **hosts/** — host-specific configurations (e.g. laptop, server)  
+- **overlays/** — custom package overlays / overrides  
+- **README.md** — this file  
+
+---
+
+## ✨ Key Features & Philosophy
+
+- **Modularity & Reuse**  
+  Clean separation of concerns. You can easily import or reuse parts of this configuration in other NixOS systems.
+
+- **Declarative & Idempotent**  
+  All configuration is described declaratively. Re-building applies consistent and repeatable states.
+
+- **Hardware-aware Configuration**  
+  Auto-detects and handles graphics, input devices, kernel modules, etc.
+
+- **Desktop & Wayland Focused**  
+  Preconfigured for modern desktop environments (Wayland, Hyprland, etc.).
+
+- **Custom Overlays & Packages**  
+  You can extend or override packages via `overlays/`.
+
+- **Security & Performance**  
+  Integrated optimizations, service hardening, and careful default settings.
+
+---
+
+## 🛠 Usage Guide
+
+Here’s how to adopt or replicate this configuration on a new NixOS machine:
+
+1. **Clone the repository**  
+   ```bash
+   git clone https://github.com/LFour86/nixos-lf.git
+   cd nixos-lf
+   ```
+
+2. **Install or switch to this flake**  
+   For example:
+   ```bash
+   sudo nixos-rebuild switch --flake .#laptop
+   ```
+
+   Adjust the host name (e.g. `#laptop`, `#home-server`) to match files under `hosts/`.
+
+3. **Customize your host config**  
+   Edit `hosts/<your-host>.nix` to override or enable services specific to your machine.
+
+4. **Add or override modules**  
+   Use `modules/` and `overlays/` to customize behavior globally or per host.
+
+5. **Test and iterate**  
+   Use `nixos-rebuild` frequently to test changes. The flake structure gives safety via atomic rollbacks.
+
+---
+
+## 🔄 Advanced Topics & Tips
+
+- **Overlays**  
+  Use `overlays/my-overlays.nix` to override or extend Nix packages globally.
+
+- **Device Modules**  
+  Place hardware-specific modules under `modules/hardware/`, e.g. GPU, input devices, firmware.
+
+- **Service Modules**  
+  Place service configurations (e.g. `ssh`, `firewall`, `network`) in `modules/services/`.
+
+- **Desktops / UI**  
+  Desktop environments, window managers, status bars, Wayland setups go under `modules/desktop/`.
+
+- **Rollbacks & Safe Changes**  
+  NixOS ensures you can roll back any change with:
+  ```bash
+  sudo nixos-rebuild switch --rollback
+  ```
+
+---
+
+## 🚀 Roadmap & Future Ideas
+
+- [ ] Add automated host detection (e.g. laptop vs server)  
+- [ ] Extend support for multiple desktops (GNOME, KDE, Sway)  
+- [ ] Integrate more custom overlays (games, dev tools)  
+- [ ] Add automated hardware testing module  
+- [ ] Enhance documentation with module dependency graph  
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License. You are free to use, modify, and share it.
+
+---
+
+## 📬 Contact & Feedback
+
+If you run into issues or have suggestions, feel free to open an issue or pull request.
+
+Enjoy NixOS!  
+— LFour86  
