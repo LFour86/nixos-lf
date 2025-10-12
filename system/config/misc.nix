@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 {
-  # Enable flake
+  # Enable Flake
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Linux Latest Kernel
@@ -9,10 +9,10 @@
   # For Development/Debugging
   #environment.enableDebugInfo = true;
 
-  # Set your time zone.
+  # Set Timezone.
   time.timeZone = "Asia/Shanghai";
 
-  # Set fonts
+  # Set Fonts
   fonts.fontDir.enable = true;
   fonts.packages = with pkgs; [
 	maple-mono.NF
@@ -21,6 +21,6 @@
 	wqy_zenhei
   ];
 
-  #System version
+  #System Version
   system.stateVersion = "25.11";
 }
