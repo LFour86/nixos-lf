@@ -9,21 +9,20 @@ This repository contains my personal NixOS configuration files, modules, and cus
 ```
 nixos-lf/
 ├── flake.nix
-├── modules/
+├── system/
+│   ├── config/
 │   ├── hardware/
-│   ├── services/
-│   └── desktop/
-├── hosts/
-│   ├── laptop.nix
-│   └── home-server.nix
+│   └── programs/
+├── home/
+│   ├── config/
+│   └── programs/
 ├── overlays/
-│   └── my-overlays.nix
 └── README.md
 ```
 
 - **flake.nix** — the root Nix flake entry point  
-- **modules/** — modular NixOS modules (for hardware, services, desktop configs)  
-- **hosts/** — host-specific configurations (e.g. laptop, server)  
+- **system/** — NixOS system configurations
+- **home/** — home-manager configurations  
 - **overlays/** — custom package overlays / overrides  
 - **README.md** — this file  
 
