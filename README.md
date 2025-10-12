@@ -102,12 +102,6 @@ Here’s how to adopt or replicate this configuration on a new NixOS machine:
   ```bash
   sudo nixos-rebuild switch --rollback
   ```
-  
----
-
-## 📜 License
-
-This project is licensed under the MIT License. You are free to use, modify, and share it.
 
 ---
 
