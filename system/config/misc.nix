@@ -10,7 +10,7 @@
   #environment.enableDebugInfo = true;
 
   # Set your time zone.
-  time.timeZone = "America/New_York";
+  time.timeZone = "Asia/Shanghai";
 
   # Set fonts
   fonts.fontDir.enable = true;
