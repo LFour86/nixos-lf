@@ -102,17 +102,7 @@ Here’s how to adopt or replicate this configuration on a new NixOS machine:
   ```bash
   sudo nixos-rebuild switch --rollback
   ```
-
----
-
-## 🚀 Roadmap & Future Ideas
-
-- [ ] Add automated host detection (e.g. laptop vs server)  
-- [ ] Extend support for multiple desktops (GNOME, KDE, Sway)  
-- [ ] Integrate more custom overlays (games, dev tools)  
-- [ ] Add automated hardware testing module  
-- [ ] Enhance documentation with module dependency graph  
-
+  
 ---
 
 ## 📜 License
