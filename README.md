@@ -1,5 +1,7 @@
 # NixOS‑LF — My NixOS Configuration
 
+[!NOTE] Due to some reasons ~~(Linux kernel? Nix's terrible symlinks?)~~ , I gave up using NixOS as my daily system, so updates will be occasional.
+
 This repository contains my personal NixOS configuration files, modules, and customizations designed to deliver a reproducible, performant, and modular NixOS setup.  
 
 ---
@@ -91,7 +93,7 @@ Here’s how to adopt or replicate this configuration on a new NixOS machine:
   Place service configurations (e.g. `ssh`, `firewall`, `network`) in `system/programs/` and `system/config/`.
 
 - **Desktops / UI**  
-  Desktop environments, window managers, status bars, Wayland setups go under `system/coonfig/desktop.nix`.
+  Desktop environments, window managers, status bars, Wayland setups go under `system/config/desktop.nix`.
 
 - **Rollbacks & Safe Changes**  
   NixOS ensures you can roll back any change with:
