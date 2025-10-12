@@ -2,7 +2,7 @@
 {
   home.packages = with pkgs;[
 	# Daily Applications
-	bilibili-local
+	#bilibili-local
 	google-chrome
 	firefox
 	motrix
@@ -57,8 +57,8 @@
 	qtcreator
 
 	# Game
-	melonDS
-	mgba
+	#melonDS
+	#mgba
 	prismlauncher
   ];
 }
