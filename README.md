@@ -66,13 +66,13 @@ Here’s how to adopt or replicate this configuration on a new NixOS machine:
    sudo nixos-rebuild switch --flake .#laptop
    ```
 
-   Adjust the host name (e.g. `#laptop`, `#home-server`) to match files under `hosts/`.
+   Adjust the host name (e.g. `#laptop`, `#home-server`) to match files under `system/config/user.nix` and `home/default.nix`.
 
 3. **Customize your host config**  
-   Edit `hosts/<your-host>.nix` to override or enable services specific to your machine.
+   Edit `system/config/user.nix` and `home/default.nix` to override or enable services specific to your machine.
 
 4. **Add or override modules**  
-   Use `modules/` and `overlays/` to customize behavior globally or per host.
+   Use `system/` and `overlays/` to customize behavior globally or per host.
 
 5. **Test and iterate**  
    Use `nixos-rebuild` frequently to test changes. The flake structure gives safety via atomic rollbacks.
@@ -85,13 +85,13 @@ Here’s how to adopt or replicate this configuration on a new NixOS machine:
   Use `overlays/my-overlays.nix` to override or extend Nix packages globally.
 
 - **Device Modules**  
-  Place hardware-specific modules under `modules/hardware/`, e.g. GPU, input devices, firmware.
+  Place hardware-specific modules under `system/hardware/`, e.g. GPU, input devices, firmware.
 
 - **Service Modules**  
-  Place service configurations (e.g. `ssh`, `firewall`, `network`) in `modules/services/`.
+  Place service configurations (e.g. `ssh`, `firewall`, `network`) in `system/programs/` and `system/config/`.
 
 - **Desktops / UI**  
-  Desktop environments, window managers, status bars, Wayland setups go under `modules/desktop/`.
+  Desktop environments, window managers, status bars, Wayland setups go under `system/coonfig/desktop.nix`.
 
 - **Rollbacks & Safe Changes**  
   NixOS ensures you can roll back any change with:
