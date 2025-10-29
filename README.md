@@ -44,7 +44,7 @@ nixos-lf/
   Auto-detects and handles graphics, input devices, kernel modules, etc.
 
 - **Desktop & Wayland Focused**  
-  Preconfigured for modern desktop environments (Wayland, Hyprland, etc.).
+  Preconfigured for modern desktop environments (KDE-Wayland, Hyprland, etc.).
 
 - **Custom Overlays & Packages**  
   You can extend or override packages via `overlays/`.
