@@ -17,7 +17,11 @@
   fonts.packages = with pkgs; [
 	maple-mono.NF
 	maple-mono.NF-CN
+	nerd-fonts.jetbrains-mono
 	minecraftia
+	font-awesome
+	nerd-fonts.ubuntu
+	nerd-fonts.ubuntu-mono
 	wqy_zenhei
   ];
 
