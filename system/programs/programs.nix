@@ -10,8 +10,8 @@
   programs.steam.enable = true;
 
   # Enable fish
-  users.defaultUserShell = pkgs.fish;
-  environment.shells = with pkgs; [ fish ];
+  #users.defaultUserShell = pkgs.fish;
+  #environment.shells = with pkgs; [ fish ];
   programs.fish.enable = true;
 
   # Neovim
