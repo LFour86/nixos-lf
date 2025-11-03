@@ -11,13 +11,6 @@
        runAsRoot = true;
        swtpm.enable = true;
        vhostUserPackages = [ pkgs.virtiofsd ];
-       ovmf = {
-          enable = true;
-          packages = [(pkgs.OVMF.override {
-              secureBoot = true;
-              tpmSupport = true;
-       }).fd];
-     };
     };
    };
    
@@ -38,8 +31,8 @@
   # users.extraGroups.docker.members = [ "nixos" ];
 
   # Enable Podman
- # virtualisation = {
-   # podman = {
+  #virtualisation = {
+   #podman = {
    #   enable = true;
 
       # Create a `docker` alias for podman, to use it as a drop-in replacement
@@ -50,7 +43,7 @@
    #   defaultNetwork.settings.dns_enabled = true;
    # };
   #};
- # environment.variables.DBX_CONTAINER_MANAGER = "podman";
+  #environment.variables.DBX_CONTAINER_MANAGER = "podman";
   #users.extraGroups.podman.members = [ "nixos" ];
 
   #environment.systemPackages = with pkgs; [
@@ -68,4 +61,3 @@
     #docker-credential-helpers
   #];
 }
-
