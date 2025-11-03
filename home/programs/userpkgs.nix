@@ -1,64 +1,68 @@
 {pkgs, ...}:
 {
   home.packages = with pkgs;[
-	# Daily Applications
-	#bilibili-local
-	google-chrome
-	firefox
-	motrix
-	spotify
-	scrcpy
-	sillytavern
-	wpsoffice-cn
+    # Daily Applications
+    bilibili-local
+    google-chrome
+    firefox
+    motrix
+    spotify
+    scrcpy
+    sillytavern
+    wpsoffice-cn
 
-	# Chat
-	qq
-	#wechat-uos
-	wemeet
+    # Chat
+    qq
+    wechat-uos
+    wemeet
 
-	# Pitcure editor
-	gimp
-	krita
-	inkscape
+    # Pitcure editor
+    gimp
+    krita
+    inkscape
 
-	# Ventoy
-	#ventoy-full
+    # Ventoy
+    #ventoy-full
 
-	# Network Proxy
-	clash-rs
-	clash-verge-rev
+    # Network Proxy
+    clash-rs
+    clash-verge-rev
+    sing-box
+    v2ray
+    v2rayn
 
-	# Editor
-	zed-editor
+    # Editor
+    #zed-editor
 
-	# C/C++
-	jetbrains.clion
+    # C/C++
+    jetbrains.clion
 
-	# STM32
-	stm32cubemx
+    # STM32
+    stm32cubemx
 
-	# Arduino/ESP32
-	arduino-ide
+    # Arduino/ESP32
+    arduino-ide
 	
-	# EDA
-	#kicad
-	#kicadAddons.kikit
+    # EDA
+    #kicad
+    #kicadAddons.kikit
 
-	# CAD
-	freecad
+    # CAD
+    freecad
 	
-	# Java
-	jetbrains.idea-ultimate
+    # Java
+    #jetbrains.idea-ultimate
 
-	# Python
-	jetbrains.pycharm-professional
+    # Python
+    jetbrains.pycharm-professional
 
-	# Qt
-	qtcreator
+    # Qt
+    qtcreator
 
-	# Game
-	#melonDS
-	#mgba
-	prismlauncher
+    # Game
+    #melonDS
+    #mgba
+    #ppsspp
+    prismlauncher
   ];
 }
