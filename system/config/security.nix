@@ -124,7 +124,7 @@
   ];
  
   # Crypto System
-  boot.initrd.luks.devices."luks-c1617c82-10a5-4274-ae2a-15b98c1aa074".device = "/dev/disk/by-uuid/c1617c82-10a5-4274-ae2a-15b98c1aa074";
+  boot.initrd.luks.devices."luks-c6c2e981-5628-42e8-ba3b-0a143525829b".device = "/dev/disk/by-uuid/c6c2e981-5628-42e8-ba3b-0a143525829b";
 
   # Crypto Swap
   #boot.initrd.luks.devices."swap" = {
@@ -145,34 +145,33 @@
   services.devmon.enable = true;
 
   # Enable USB Guard
-  services.usbguard = {
-    enable = false;
-    dbus.enable = false;
-    implicitPolicyTarget = "block";
+  #services.usbguard = {
+    #enable = false;
+    #dbus.enable = false;
+    #implicitPolicyTarget = "block";
     # TODO set yours pref USB devices (change {id} to your trusted USB device),
     #use "lsusb" command (from usbutils package) to get list of all connected USB devices
     #including integrated devices like camera, bluetooth, wifi, etc.
     #with their IDs or just disable `usbguard`
-    rules = ''
-          allow id 1d6b:0002 # Linux Foundation 2.0 root hub
-          allow id 1d6b:0003 # Linux Foundation 3.0 root hub
-          allow id 0bda:5411 # Realtek Semiconductor Corp. RTS5411 hub
-          allow id 5986:118a # Bison Electronics Inc. Integrated Camera
-          allow id 30fa:1701 # INSTANT USB GAMING MOUSE
-	  allow id 05e3:0610 # Genesys Logic, Inc. Hub
-          allow id 048d:c102 # Integrated Technology Express, Inc. ITE Device(8910)
-          allow id 0489:e0cd # Foxconn / Hon Hai MediaTek Bluetooth Adapter
-          allow id 1d6b:0003 # Linux Foundation 3.0 root hub
-          allow id 0bda:0411 # Realtek Semiconductor Corp. Hub
-	  allow id 0bda:9201 # Realtek Semiconductor Corp. Ugreen Storage Device
-          allow id 258a:013b # Sino Wealth USB Keyboard
-	  allow id 0483:572a # STMicroelectronics STM32F401 microcontroller [ARM Cortex M4] [CDC/ACM serial port]
-          allow id 24a9:205a # ASolid USB
-          allow id 1908:0226 # GEMBIRD MicroSD Card Reader/Writer
-	  allow id 1ea7:0064 # SHARKOON Technologies GmbH 2.4GHz Wireless rechargeable vertical mouse [More&Better]
-    '';
-  };
+    #rules = ''
+          #allow id 1d6b:0002 # Linux Foundation 2.0 root hub
+          #allow id 1d6b:0003 # Linux Foundation 3.0 root hub
+          #allow id 0bda:5411 # Realtek Semiconductor Corp. RTS5411 hub
+          #allow id 5986:118a # Bison Electronics Inc. Integrated Camera
+          #allow id 30fa:1701 # INSTANT USB GAMING MOUSE
+	  #allow id 05e3:0610 # Genesys Logic, Inc. Hub
+          #allow id 048d:c102 # Integrated Technology Express, Inc. ITE Device(8910)
+          #allow id 0489:e0cd # Foxconn / Hon Hai MediaTek Bluetooth Adapter
+          #allow id 1d6b:0003 # Linux Foundation 3.0 root hub
+          #allow id 0bda:0411 # Realtek Semiconductor Corp. Hub
+	  #allow id 0bda:9201 # Realtek Semiconductor Corp. Ugreen Storage Device
+          #allow id 258a:013b # Sino Wealth USB Keyboard
+	  #allow id 0483:572a # STMicroelectronics STM32F401 microcontroller [ARM Cortex M4] [CDC/ACM serial port]
+          #allow id 24a9:205a # ASolid USB
+          #allow id 1908:0226 # GEMBIRD MicroSD Card Reader/Writer
+	  #allow id 1ea7:0064 # SHARKOON Technologies GmbH 2.4GHz Wireless rechargeable vertical mouse [More&Better]
+    #'';
+  #};
 
   environment.systemPackages = with pkgs; [];
 }
-
