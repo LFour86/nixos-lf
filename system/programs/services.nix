@@ -33,8 +33,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-      mpc-cli
+      mpc
       sysprof
   ];
 }
-
