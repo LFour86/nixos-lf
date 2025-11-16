@@ -1,8 +1,5 @@
 # NixOS‑LF — My NixOS Configuration
 
->[!NOTE]
-> Due to some reasons (~~Linux kernel?~~ Nix's terrible symlinks?), I gave up using NixOS as my daily system, so updates will be occasional.
-
 This repository contains my personal NixOS configuration files, modules, and customizations designed to deliver a reproducible, performant, and modular NixOS setup.  
 
 ---
