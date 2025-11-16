@@ -7,14 +7,16 @@
 
   # Substituters mirrors
   nix = {
-      settings = {
-        substituters = [
-          "https://mirror.tuna.tsinghua.edu.cn/nix-channels/store"
-          "https://mirrors.ustc.edu.cn/nix-channels/store"
-	  "https://mirror.nju.edu.cn/nix-channels/store"
-          "https://cache.nixos.org"
-        ];
-      };
+    settings = {
+      substituters = [
+        "https://mirror.tuna.tsinghua.edu.cn/nix-channels/store"
+        "https://mirrors.ustc.edu.cn/nix-channels/store"
+        "https://mirror.nju.edu.cn/nix-channels/store"
+        "https://mirror.iscas.ac.cn/nix-channels/store"
+        "https://mirror.sjtu.edu.cn/nix-channels/store"
+        "https://cache.nixos.org"
+      ];
+    };
   };
 
   #hosts
@@ -24,3 +26,4 @@
 
   environment.systemPackages = with pkgs; [];
 }
+
