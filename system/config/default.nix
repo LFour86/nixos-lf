@@ -11,4 +11,3 @@
     ./network.nix
   ];
 }
-
