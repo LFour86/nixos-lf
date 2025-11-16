@@ -8,16 +8,52 @@ This repository contains my personal NixOS configuration files, modules, and cus
 
 ```
 nixos-lf/
+├── flake.lock
 ├── flake.nix
-├── system/
-│   ├── config/
-│   ├── hardware/
-│   └── programs/
-├── home/
-│   ├── config/
-│   └── programs/
-├── overlays/
-└── README.md
+├── home
+│   ├── config
+│   │   ├── default.nix
+│   │   ├── icons.nix
+│   │   └── screen.nix
+│   ├── default.nix
+│   └── programs
+│       ├── default.nix
+│       ├── llm.nix
+│       ├── programs.nix
+│       └── userpkgs.nix
+├── overlays
+│   ├── bilibili.nix
+│   ├── default.nix
+│   └── LocalApps/
+└── system
+    ├── config
+    │   ├── bootloader.nix
+    │   ├── default.nix
+    │   ├── desktop.nix
+    │   ├── environment-variables.nix
+    │   ├── layout.nix
+    │   ├── misc.nix
+    │   ├── network.nix
+    │   ├── powermanager.nix
+    │   ├── security.nix
+    │   └── user.nix
+    ├── default.nix
+    ├── hardware
+    │   ├── amdgpu.nix
+    │   ├── audio.nix
+    │   ├── bluetooth.nix
+    │   ├── camera.nix
+    │   ├── default.nix
+    │   ├── nvidia.nix
+    │   └── partition.nix
+    └── programs
+        ├── default.nix
+        ├── fhs.nix
+        ├── programs.nix
+        ├── services.nix
+        ├── ssh.nix
+        ├── systempkgs.nix
+        └── virtualisation.nix
 ```
 
 - **flake.nix** — the root Nix flake entry point  
