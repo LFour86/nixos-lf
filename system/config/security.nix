@@ -8,61 +8,61 @@
   networking.nftables = {
   enable = true;
   ruleset = ''
-        table inet filter {
-          chain input {
-            type filter hook input priority 0;
+    table inet filter {
+      chain input {
+        type filter hook input priority 0;
 
-            # Allow Local Loopback
-            iif lo accept
+        # Allow Local Loopback
+        iif lo accept
 
-            # Allow Established/Related Connections
-            ct state established,related accept
+        # Allow Established/Related Connections
+        ct state established,related accept
 
-            # Allow ICMP (Ping / IPv6 Required)
-            ip protocol icmp accept
-            ip6 nexthdr icmpv6 accept
+        # Allow ICMP (Ping / IPv6 Required)
+        ip protocol icmp accept
+        ip6 nexthdr icmpv6 accept
 
-            # Allow DHCP (Client Request & Server Response)
-            udp dport 67-68 accept
-            udp sport 67-68 accept
+        # Allow DHCP (Client Request & Server Response)
+        udp dport 67-68 accept
+        udp sport 67-68 accept
 
-            # Allow mDNS / Avahi / Bluetooth Network Discovery
-            udp dport 5353 accept
+        # Allow mDNS / Avahi / Bluetooth Network Discovery
+        udp dport 5353 accept
 
-            # Allow SSH
-            # tcp dport 22 accept
+        # Allow SSH
+        # tcp dport 22 accept
 
-            # Default Rejection
-            reject with icmpx type admin-prohibited
-          }
+        # Default Rejection
+        reject with icmpx type admin-prohibited
+     }
 
-          chain forward {
-            type filter hook forward priority 0;
+     chain forward {
+       type filter hook forward priority 0;
 
-            # Allow Hotspot NAT Forwarding (Wireless → Wired)
-            ct state established,related accept
-            iifname "wlo1" oifname "enp4s0" accept
-            oifname "wlo1" iifname "enp4s0" accept
+       # Allow Hotspot NAT Forwarding (Wireless → Wired)
+       ct state established,related accept
+       iifname "wlo1" oifname "enp4s0" accept
+       oifname "wlo1" iifname "enp4s0" accept
 
-            # Default Rejection
-            reject with icmpx type admin-prohibited
-          }
+       # Default Rejection
+       reject with icmpx type admin-prohibited
+     }
 
-          chain output {
-            type filter hook output priority 0;
-            accept
-          }
-      }
+     chain output {
+       type filter hook output priority 0;
+       accept
+     }
+   }
 
-      table ip nat {
-        chain postrouting {
-          type nat hook postrouting priority 100;
+   table ip nat {
+     chain postrouting {
+       type nat hook postrouting priority 100;
 
-          # Perform Source Address Spoofing on Hotspot Traffic.
-          oifname "enp4s0" masquerade
-  	}
-      }
-    '';
+       # Perform Source Address Spoofing on Hotspot Traffic.
+       oifname "enp4s0" masquerade
+     }
+    }
+ '';
   };
 
   # Enable Security Services
@@ -124,13 +124,7 @@
   ];
  
   # Crypto System
-  boot.initrd.luks.devices."luks-c6c2e981-5628-42e8-ba3b-0a143525829b".device = "/dev/disk/by-uuid/c6c2e981-5628-42e8-ba3b-0a143525829b";
-
-  # Crypto Swap
-  #boot.initrd.luks.devices."swap" = {
-    #device = "/dev/nvme1n1p3";
-    #allowDiscards = true;
-  #};
+  boot.initrd.luks.devices."luks-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX".device = "/dev/disk/by-uuid/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX";
 
   # Enable CUPS to Print Documents.
   services.printing.enable = true;
@@ -175,3 +169,4 @@
 
   environment.systemPackages = with pkgs; [];
 }
+
