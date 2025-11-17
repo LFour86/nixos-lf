@@ -1,6 +1,7 @@
 { pkgs, ... }:
+
 {
-  # Select internationalisation properties.
+  # System locale
   i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
@@ -15,35 +16,36 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
 
-  # Chniese inputMethod
+  ## Fcitx5 + Rime (Cloud Pinyin version)
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
-    fcitx5.waylandFrontend = true;
-    fcitx5.addons = with pkgs; [
-	fcitx5-rime
-	fcitx5-nord
-	fcitx5-gtk
-	libpinyin
-	kdePackages.fcitx5-qt
-	kdePackages.fcitx5-unikey
-	kdePackages.fcitx5-skk-qt
-	kdePackages.fcitx5-configtool
-	kdePackages.fcitx5-with-addons
-        kdePackages.fcitx5-chinese-addons
-	fcitx5-pinyin-moegirl
-    ];
+
+    fcitx5 = {
+      waylandFrontend = true;
+
+      addons = with pkgs; [
+        # Input method modules
+        fcitx5-gtk
+        kdePackages.fcitx5-qt
+
+        # RIME engine
+        fcitx5-rime
+
+        # Yunpinyin / extended dictionaries
+        fcitx5-pinyin-moegirl
+        # fcitx5-chinese-addons   # (optional) more engines and schemas
+      ];
+    };
   };
 
-  # Packages
   environment.systemPackages = with pkgs; [
-    #kdePackages.fcitx5-chinese-addons
+    kdePackages.fcitx5-configtool
   ];
 }
 
