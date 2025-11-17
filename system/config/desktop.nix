@@ -52,9 +52,9 @@
     #gnomeExtensions.workspace-indicator
     #gnomeExtensions.tweaks-in-system-menu
     # Gnome windows themes
-    pkgs.adwaita-icon-theme
-    adwaita-qt
-    adwaita-qt6
+    #pkgs.adwaita-icon-theme
+    #adwaita-qt
+    #adwaita-qt6
     # Gnome extra ssettings
     #gnome-tweaks
     
@@ -77,10 +77,13 @@
     wl-clipboard # Command-line copy/paste utilities for Wayland
 
     # Niri
-    hyprlock
-    hypridle
-    #nemo
+    alacritty
+    fuzzel
+    mako
+    nemo
     xwayland-satellite # xwayland support
+    swaylock
+    swayidle
     swww
     waybar
   ];
