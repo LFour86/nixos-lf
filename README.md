@@ -13,8 +13,17 @@ nixos-lf/
 ├── home
 │   ├── config
 │   │   ├── default.nix
-│   │   ├── icons.nix
-│   │   └── screen.nix
+│   │   ├── niri
+│   │   │   ├── default.nix
+│   │   │   ├── niri.nix
+│   │   │   ├── swayidle.nix
+│   │   │   └── swaylock.nix
+│   │   └── waybar
+│   │       ├── colors_css.nix
+│   │       ├── config_jsonc.nix
+│   │       ├── default.nix
+│   │       ├── modules_json.nix
+│   │       └── style_css.nix
 │   ├── default.nix
 │   └── programs
 │       ├── default.nix
@@ -24,7 +33,7 @@ nixos-lf/
 ├── overlays
 │   ├── bilibili.nix
 │   ├── default.nix
-│   └── LocalApps/
+│   └── LocalApps\
 └── system
     ├── config
     │   ├── bootloader.nix
