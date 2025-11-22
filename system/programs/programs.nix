@@ -10,13 +10,14 @@
   programs.steam.enable = true;
 
   # Enable fish
+  # Enable fish
   programs.fish = {
     enable = true;
     shellAliases = {
       li = "lsd --human-readable --all";
       tt = "tree";
       update = "cd /etc/nixos && sudo nixos-rebuild switch --flake .#lfour";
-      garbage = "sudo nix-collect-garbage --delete-older-than 7d && nix-collect-garbage --delete-older-than 7d";
+      garbage = "sudo nix-collect-garbage --delete-older-than 3d && nix-collect-garbage --delete-older-than 3d";
       flake = "cd /etc/nixos && sudo nix flake update";
     };
   };
