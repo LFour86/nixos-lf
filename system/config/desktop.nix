@@ -15,6 +15,7 @@
   services = {
     desktopManager.plasma6.enable = true;
     displayManager.sddm.enable = true;
+    displayManager.sddm.wayland.enable = true;
   };
   # Colorful
   services.colord.enable = true;
@@ -28,6 +29,7 @@
 
   # Niri
   programs.niri.enable = true;
+  programs.xwayland.enable = true;
 
   environment.systemPackages = with pkgs; [ 
     # Gnome extensions
@@ -82,10 +84,11 @@
     mako
     nemo
     xwayland-satellite # xwayland support
-    swaylock
+    swaylock-effects
     swayidle
     swww
     waybar
+    wlr-randr
   ];
 }
 
