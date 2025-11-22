@@ -8,4 +8,3 @@
     ./nvidia.nix
   ];
 }
-
