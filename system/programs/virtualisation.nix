@@ -25,9 +25,17 @@
     };
   };
 
+  # Enable Podman
+  #virtualisation.podman = {
+    #enable = true;
+    #dockerCompat = true;
+    #defaultNetwork.settings.dns_enabled = true;
+  #};
+
   environment.systemPackages = with pkgs; [
     docker-compose
     docui
+    distrobox
   ];
 }
 
