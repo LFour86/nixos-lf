@@ -14,6 +14,13 @@
     XMODIFIERS = "@im=fcitx";
     GLFW_IM_MODULE = "fcitx";   # For games/tools using GLFW
     SDL_IM_MODULE = "fcitx";    # For SDL apps (games)
+
+    # Proxy
+    http_proxy = "";
+    https_proxy = "";
+    all_proxy = "";
+    ALL_PROXY = "";
+    NO_PROXY = "";
   };
 
   environment.extraOutputsToInstall = [ "dev" ];
