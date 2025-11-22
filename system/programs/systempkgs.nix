@@ -2,86 +2,50 @@
 {
   environment.systemPackages = with pkgs; [
     ###############################
-    btop
-    fastfetch
-    fish
-    git
-    neovim
-    unrar
-    unzip
-    vim
-    wget
-    electron
-    ffmpeg-full
-    networkmanager
+    btop fastfetch fish
+    git git-lfs neovim
+    unrar unzip vim
+    wget electron ffmpeg-full 
+    ncurses5 networkmanager
     ###############################
-    blueman
-    bluez
-    bluez-tools
-    exfat
-    ntfs3g
+    blueman bluez bluez-tools
+    exfat ntfs3g
     ###############################
-    alsa-utils
-    bear
-    coreutils-full
-    dhcpcd
-    direnv
-    fuse
-    glib-networking
-    klibcShrunk
-    lsd
-    lshw
-    lsof
-    pciutils
-    tree
-    sl
+    alsa-utils bear coreutils-full
+    dhcpcd direnv devenv 
+    fuse glib-networking klibcShrunk
+    lsd lshw lsof
+    pciutils tree sl
     usbutils
     ###### C & C++ ################
     # Default
-    cmake
-    gcc_multi 
-    gdb 
-    gnumake
-    llvmPackages_latest.clang-tools
-    llvmPackages_latest.lldb
-    llvmPackages_latest.libllvm
-    llvmPackages_latest.libcxx
-    llvmPackages_latest.clang
+    cmake gcc_multi  gdb 
+    gnumake llvmPackages_latest.clang-tools llvmPackages_latest.lldb
+    llvmPackages_latest.libllvm llvmPackages_latest.libcxx llvmPackages_latest.clang
     #
     ###### JAVA ##################
-    jre21_minimal
-    zulu24
-    jre8
+    jdk8 jdk
     ###### Embedded Development ######
     #
-    arduino-cli 
-    dotnet-sdk
-    dotnet-runtime
-    gcc-arm-embedded
-    ninja
-    openocd
+    arduino-cli  dotnet-sdk dotnet-runtime
+    gcc-arm-embedded ninja openocd
     platformio
     #
     ### STM32 ###
     #
-    stm32flash
-    stm32loader
-    stlink
-    stlink-gui
-    stlink-tool
+    stm32flash stm32loader stlink
+    stlink-gui stlink-tool
     #
     ### ESP32 ###
     #
-    espflash
-    esptool
+    espflash esptool
     #
     ###### Python #################
-    python311
+    python314
     ###### NodeJS #################
     nodejs_24
     ###### Rust ###################
-    cargo
-    rustc
+    cargo rustc
     ###### GO ####################
     go
     ###### END ###################
