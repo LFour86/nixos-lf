@@ -1,7 +1,7 @@
 {
   imports = [
-    #./icons.nix
-    #./screen.nix
+    ./niri
+    ./waybar
   ];
 }
 
