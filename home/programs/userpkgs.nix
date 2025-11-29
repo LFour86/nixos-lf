@@ -2,8 +2,7 @@
 {
   home.packages = with pkgs;[
     # Daily Applications
-    baidupcs-go bilibili-local codex
-    firefox gemini-cli google-chrome
+    bilibili-local firefox google-chrome
     imv libreoffice motrix
     mpv spotify scrcpy
     sillytavern wpsoffice-cn yazi
@@ -12,7 +11,7 @@
     qq wechat-uos #wemeet
 
     # Pitcure editor
-    gimp krita inkscape
+    #gimp krita inkscape
 
     # OBS-Studio
     obs-studio
@@ -33,28 +32,28 @@
     arduino-ide
 	
     # EDA
-    kicad kicadAddons.kikit
+    #kicad kicadAddons.kikit
 
     # CAD
-    freecad
+    #freecad
 	
     # Java
-    jetbrains.idea-ultimate
+    #jetbrains.idea-ultimate
 
     # Python
     jetbrains.pycharm-professional
 
     # Javascript
-    jetbrains.webstorm
+    #jetbrains.webstorm
 
     # Rust
-    jetbrains.rust-rover
+    #jetbrains.rust-rover
 
     # Dotnet
-    jetbrains.rider
+    #jetbrains.rider
 
     # Go
-    jetbrains.goland
+    #jetbrains.goland
 
     # Qt
     qtcreator
@@ -71,17 +70,17 @@
     ###### END ######
   ] ++ ( with obs-studio-plugins; [
   # Obs-Studio plugins
-    wlrobs waveform obs-tuna
-    obs-vaapi obs-teleport obs-hyperion
-    obs-websocket obs-vkcapture obs-gstreamer
-    obs-3d-effect input-overlay obs-multi-rtmp
-    obs-mute-filter obs-text-pthread obs-source-clone
-    obs-shaderfilter obs-source-record obs-replay-source
-    obs-livesplit-one obs-freeze-filter looking-glass-obs
-    obs-vintage-filter obs-scale-to-sound obs-composite-blur
-    obs-command-source obs-advanced-masks obs-source-switcher
-    obs-move-transition obs-gradient-source obs-transition-table
-    obs-backgroundremoval advanced-scene-switcher obs-pipewire-audio-capture
+    #wlrobs waveform obs-tuna
+    #obs-vaapi obs-teleport obs-hyperion
+    #obs-websocket obs-vkcapture obs-gstreamer
+    #obs-3d-effect input-overlay obs-multi-rtmp
+    #obs-mute-filter obs-text-pthread obs-source-clone
+    #obs-shaderfilter obs-source-record obs-replay-source
+    #obs-livesplit-one obs-freeze-filter looking-glass-obs
+    #obs-vintage-filter obs-scale-to-sound obs-composite-blur
+    #obs-command-source obs-advanced-masks obs-source-switcher
+    #obs-move-transition obs-gradient-source obs-transition-table
+    #obs-backgroundremoval advanced-scene-switcher obs-pipewire-audio-capture
   ]);
 }
 
