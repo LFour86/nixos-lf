@@ -1,10 +1,42 @@
 { config, pkgs, ... }:
-
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  nix.settings.trusted-users = [ "root" "lfour" ];
+
   # Latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # Auto Upgrade
+  system.autoUpgrade = {
+    enable = true;
+    flake = "/etc/nixos#lfour";
+    dates = "08:00";
+    allowReboot = true;
+  };
+
+  # GC
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
+
+  nix.optimise = {
+    automatic = true;
+    dates = ["weekly"];
+  };
+
+  # Nix Index
+  programs.nix-index = {
+    enable = true;
+    enableFishIntegration = true;
+    enableBashIntegration = true;
+  };
+  programs.command-not-found.enable = false;
+
+  # FZF
+  programs.fzf.fuzzyCompletion = true;
 
   time.timeZone = "Asia/Shanghai";
 
@@ -41,6 +73,6 @@
     #extraFonts = [ pkgs.twitter-color-emoji ];
   #};
 
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 }
 
