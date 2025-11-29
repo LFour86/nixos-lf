@@ -79,8 +79,8 @@
     wl-clipboard # Command-line copy/paste utilities for Wayland
 
     # Niri
-    alacritty
     fuzzel
+    kitty
     mako
     nemo
     xwayland-satellite # xwayland support
@@ -88,6 +88,7 @@
     swayidle
     swww
     waybar
+    wl-clipboard
     wlr-randr
   ];
 }
