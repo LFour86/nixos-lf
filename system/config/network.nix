@@ -5,6 +5,17 @@
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
 
+  # Magic DNS on Tailscale
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "both";
+  };
+
+  services.resolved = {
+    enable = true;
+    domains = ["~."];
+  };
+
   # Substituters mirrors
   nix = {
     settings = {
