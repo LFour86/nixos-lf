@@ -1,4 +1,7 @@
 { pkgs, ... }:
+let
+  tdRoot = "/home/lfour/FHS/TD_4.6.7_Linux";
+in
 {
   environment.systemPackages = with pkgs; [
     ###### FHS Environment ################
@@ -35,6 +38,7 @@
           libXrender libXt libXtst
           libXxf86vm libICE
         ]);
+
       runScript = "bash";
     })
 
@@ -108,6 +112,84 @@
         ])}:$LD_LIBRARY_PATH
       '';
     })
+
+    (buildFHSEnvBubblewrap {
+      name = "td-fhs";
+      chdir = "/home/lfour/FHS/TD_4.6.7_Linux";
+      targetPkgs = pkgs: with pkgs; [
+        bash coreutils unzip which file
+        zlib libusb1 udev libuuid dbus
+	# === Qt5 Libraries ===
+	libsForQt5.qt5.qtbase 
+	libsForQt5.qt5.qttools
+        # === ICU Libraries ===
+        icu  # libicui18n.so.56, libicuuc.so.56, libicudata.so.56
+        # === X11 / Graphics Libraries ===
+        mesa # libGL.so.1
+        libGL
+        # Xorg libs
+        xorg.libSM xorg.libX11 xorg.libXext xorg.libXrender 
+        xorg.libXi xorg.libICE xorg.libxcb xorg.libXrandr
+        xorg.libXfixes xorg.libXinerama xorg.libXcursor xorg.libXcomposite
+	xorg.xcbutil xkeyboard_config
+        # === GTK / GLib / Pango / Cairo Libraries ===
+        gtk2 # libgtk-x11-2.0, libgdk-x11-2.0
+	gtk3
+        atk
+	gnumake cmake gcc
+        cairo 
+        pango
+        gdk-pixbuf
+	activitywatch insync zoom
+        glib # libgio-2.0, libgobject-2.0, libgmodule-2.0, libgthread-2.0
+        fontconfig freetype zoom-us
+	libselinux libjpeg libpng brotli mount util-linux
+	fribidi libthai libdatrie expat libffi pcre2 graphite2
+        # === C++ / Toolchain ===
+        # libstdc++.so.6, libgcc_s.so.1 
+        stdenv.cc.cc # libstdc++ 和 libgcc_s
+        linux-pam
+      ];
+
+      extraBwrapArgs = [
+        "--bind" "/run/udev" "/run/udev"
+        "--bind-try" "/var/run/dbus" "/var/run/dbus"
+        "--dev-bind" "/dev" "/dev"
+      ];
+
+      runScript = "bash";
+  
+      profile = ''
+        export FHS=1
+        export LANG=en_US.UTF-8
+        export LC_ALL=en_US.UTF-8
+
+	export QT_QPA_PLATFORM="xcb"
+	export QT_XKB_CONFIG_ROOT="${xkeyboard_config}/share/X11/xkb"
+	unset XDG_SESSION_TYPE
+        unset XDG_CURRENT_DESKTOP
+        unset GDK_BACKEND
+        unset MOZ_ENABLE_WAYLAND
+
+	export QT_PLUGIN_PATH="${pkgs.libsForQt5.qt5.qtbase}/lib/qt-5/plugins:${pkgs.libsForQt5.qt5.qtbase}/lib/qt-5/plugins/platforms"
+        export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true" 
+        export LD_LIBRARY_PATH=${tdRoot}/lib/Qt/lib:${tdRoot}/lib:/lib:/usr/lib64:/run/opengl-driver/lib:${pkgs.lib.makeLibraryPath (with pkgs; [
+	  libsForQt5.qt5.qtbase libsForQt5.qt5.qttools 
+          icu zoom-us
+          libusb1 udev dbus
+	  libselinux libjpeg libpng brotli mount util-linux
+	  fribidi libthai libdatrie expat libffi pcre2 graphite2
+          mesa libGL
+	  gnumake gcc cmake
+          gtk2 atk cairo pango gdk-pixbuf glib fontconfig freetype
+          stdenv.cc.cc.lib xkeyboard_config
+          zlib zoom activitywatch insync
+          xorg.libSM xorg.libX11 xorg.libXext 
+	  xorg.libXrender xorg.libXi xorg.libICE
+	  xorg.libxcb xorg.xcbutil
+        ])}:$LD_LIBRARY_PATH
+      '';
+    })
   ];
 
   services.udev.extraRules = ''
@@ -126,3 +208,4 @@
     SUBSYSTEM=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6014", TAG+="uaccess"
   '';
 }
+
