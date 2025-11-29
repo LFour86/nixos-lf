@@ -8,6 +8,7 @@
 
   # Enable Steam
   programs.steam.enable = true;
+  hardware.steam-hardware.enable = true;
 
   # Enable fish
   # Enable fish
