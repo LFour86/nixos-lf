@@ -32,6 +32,12 @@
     #defaultNetwork.settings.dns_enabled = true;
   #};
 
+  # Linux -> Docker -> Windows
+  programs.winbox = {
+    enable = true;
+    openFirewall = true;
+  };
+
   environment.systemPackages = with pkgs; [
     docker-compose
     docui
