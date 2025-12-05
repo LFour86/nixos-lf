@@ -124,7 +124,7 @@
   ];
  
   # Crypto System
-  boot.initrd.luks.devices."luks-dc6291e6-8975-4ade-9104-5a6f66ce6dcf".device = "/dev/disk/by-uuid/dc6291e6-8975-4ade-9104-5a6f66ce6dcf";
+  boot.initrd.luks.devices."luks-xxxxxxx-xxxx-xxxx-xxxxx-xxxxxxxxxxxx".device = "/dev/disk/by-uuid/xxxxxxx-xxxx-xxxx-xxxxx-xxxxxxxxxxxx";
 
   # Crypto Swap
   #boot.initrd.luks.devices."swap" = {
