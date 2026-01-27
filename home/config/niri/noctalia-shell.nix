@@ -9,10 +9,11 @@
   programs.noctalia-shell = {
     enable = true;
     settings = {
-      settingsVersion = 44;
-
+      settingsVersion = 45;
+      
       # Bar Configuration
       bar = {
+        barType = "simple";
         position = "top";
         monitors = [];
         density = "standard";
@@ -24,6 +25,8 @@
         floating = false;
         marginVertical = 6;
         marginHorizontal = 4;
+        frameThickness = 8;
+        frameRadius = 12;
         outerCorners = true;
         exclusive = true;
         hideOnOverview = false;
@@ -44,17 +47,19 @@
               displayMode = "onhover";
             }
             {
+              id = "plugin:network-indicator";
+            }
+            {
               id = "Bluetooth";
               displayMode = "onhover";
             }
             {
               id = "Tray";
-              isCollapsible = true;
-              isCollapsed = true;
-              reverseOrder = false;
-              iconSize = 16;
-              spacing = 6;
-              customIcon = "pan-end-symbolic";
+              blacklist = [];
+              colorizeIcons = false;
+              drawerEnabled = true;
+              hidePassive = false;
+              pinned = [];
             }
           ];
           center = [
@@ -62,18 +67,37 @@
               id = "Workspace";
               characterCount = 2;
               colorizeIcons = false;
+              emptyColor = "secondary";
               enableScrollWheel = true;
+              focusedColor = "primary";
               followFocusedScreen = false;
               groupedBorderOpacity = 1;
               hideUnoccupied = false;
               iconScale = 1.0;
               labelMode = "none";
+              occupiedColor = "secondary";
               showApplications = false;
+              showBadge = true;
               showLabelsOnlyWhenOccupied = true;
               unfocusedIconsOpacity = 1;
             }
           ];
           right = [
+            { id = "plugin:catwalk"; }
+            { id = "plugin:timer"; }
+            { id = "plugin:simple-notes"; }
+            { id = "plugin:todo"; }
+            { id = "plugin:clipper"; }
+            { id = "plugin:weekly-calendar"; }
+            {
+              id = "Clock";
+              customFont = "";
+              formatHorizontal = "HH:mm";
+              formatVertical = "HH mm";
+              tooltipFormat = "HH:mm ddd, MMM dd";
+              useCustomFont = false;
+              usePrimaryColor = true;
+            }
             {
               id = "Battery";
               deviceNativePath = "";
@@ -83,15 +107,6 @@
               showNoctaliaPerformance = false;
               showPowerProfiles = false;
               warningThreshold = 30;
-            }
-            {
-              id = "Clock";
-              customFont = "";
-              formatHorizontal = "HH:mm";
-              formatVertical = "HH mm";
-              tooltipFormat = "HH:mm ddd, MMM dd";
-              useCustomFont = false;
-              usePrimaryColor = true;
             }
           ];
         };
@@ -125,6 +140,7 @@
         telemetryEnabled = false;
         enableLockScreenCountdown = true;
         lockScreenCountdownDuration = 30000;
+        autoStartAuth = false;
       };
 
       # UI Settings
@@ -135,7 +151,7 @@
         fontFixedScale = 1;
         tooltipsEnabled = true;
         panelBackgroundOpacity = 0.8;
-        panelsAttachedToBar = true;
+        panelsAttachedToBar = true; 
         settingsPanelMode = "attached";
         wifiDetailsViewMode = "grid";
         bluetoothDetailsViewMode = "grid";
@@ -284,7 +300,7 @@
 
       # Dock
       dock = {
-        enabled = true;
+        enabled = false;
         position = "bottom";
         displayMode = "auto_hide";
         backgroundOpacity = 1;
@@ -437,7 +453,7 @@
       };
     };
 
-    # Plugin Configuration
+# Plugin Configuration
     plugins = {
       sources = [
         {
@@ -446,8 +462,33 @@
           url = "https://github.com/noctalia-dev/noctalia-plugins";
         }
       ];
+
       states = {
         catwalk = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        network-indicator = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        timer = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        simple-notes = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        todo = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        clipper = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        weekly-calendar = {
           enabled = true;
           sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
         };
@@ -473,3 +514,4 @@
     };
   };
 }
+
