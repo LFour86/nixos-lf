@@ -39,7 +39,7 @@ A declarative NixOS system configuration using Nix flakes, featuring a customize
         
 3. Build and switch to the new configuration:
    ```bash
-   sudo nixos-rebuild switch --flake .#youname
+   sudo nixos-rebuild switch --flake .#yourname
    ```
 
 ## Directory Structure
