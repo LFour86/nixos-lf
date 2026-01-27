@@ -13,6 +13,7 @@ in
     bilibili-local imv motrix
     mpv scrcpy sillytavern
     wpsoffice-cn yazi zen
+    freeplane
 
     # Audio/Video Editor
     kdePackages.kdenlive kid3 shotcut
@@ -54,6 +55,7 @@ in
     octaveFull
 
     # Wine
+    unstable-pkgs.lutris unstable-pkgs.protonplus
     wineWowPackages.stable winetricks
 
     # Game
