@@ -36,11 +36,6 @@
   services.kmscon = {
     enable = true;
     fonts = [ { name = "Maple Mono NF CN"; package = pkgs.maple-mono.NF-CN; } ];
-    useXkbConfig = true;
-    hwRender = true;
-    extraOptions = "
-      --term xterm-256color
-    ";
     extraConfig = ''
       font-engine=pango
       font-size=12
