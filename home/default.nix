@@ -8,7 +8,7 @@
   home.homeDirectory = "/home/lfour";
 
   imports = [
-    inputs.noctalia.homeModules.default
+    inputs.noctalia-shell.homeModules.default
   	./config
 	  ./programs 
   ];
