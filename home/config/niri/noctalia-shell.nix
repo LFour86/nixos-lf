@@ -2,7 +2,7 @@
 {
   # install package
   home.packages = with pkgs; [
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.noctalia-shell.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   # configure options
