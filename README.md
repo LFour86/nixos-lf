@@ -72,7 +72,6 @@ A declarative NixOS system configuration using Nix flakes, featuring a customize
 
 - NixOS 25.11 && unstable
 - Home Manager
-- Zen Browser flake
 - Noctalia shell
 
 
