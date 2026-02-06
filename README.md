@@ -19,7 +19,7 @@ A declarative NixOS system configuration using Nix flakes, featuring a customize
 - **Desktop Environment**: Niri Wayland compositor with custom configuration
 - **Shell**: Noctalia shell integration
 - **Editor**: Neovim with custom plugins and settings
-- **Browser**: Zen Browser
+- **Browser**: Firefox Browser
 - **System Management**: Home Manager for user configuration
 - **Hardware Support**: NVIDIA, AMDGPU, Bluetooth, audio, and other hardware configurations
 - **Security**: SSH, firewall, and security hardening
