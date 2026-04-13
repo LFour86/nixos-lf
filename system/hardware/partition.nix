@@ -1,0 +1,1 @@
+# put your hardware-configuration.nix here.
