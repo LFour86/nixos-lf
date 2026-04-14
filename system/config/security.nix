@@ -105,8 +105,7 @@
   security.auditd.enable = false;
 
   # Disk encrying
-  #boot.initrd.luks.devices."luks-xxxxxxxx-638b-xxxx-xxxx-xxxxxxxxxxxx".device = "/dev/disk/by-uuid/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx";
-
+  #boot.initrd.luks.devices."luks-xxx".device = "/dev/disk/by-uuid/xxx";
 
   environment.systemPackages = with pkgs; [
     # CA / TLS
