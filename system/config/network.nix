@@ -6,6 +6,9 @@
   networking.networkmanager.enable = true;
   networking.resolvconf.enable = false;
 
+  # BCC
+  programs.bcc.enable = true;
+
   # Magic DNS on Tailscale
   services.tailscale = {
     enable = true;

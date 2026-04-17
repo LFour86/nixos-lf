@@ -1,4 +1,4 @@
-{ pkgs, ... }: 
+{ config, pkgs, ... }: 
 
 {
   gtk = {
@@ -10,6 +10,14 @@
     iconTheme = {
       name = "Adwaita";
       package = pkgs.adwaita-icon-theme;
+    };
+    gtk3 = {
+      enable = true;
+      theme = config.gtk.theme;
+    };
+    gtk4 = {
+      enable = true;
+      theme = config.gtk.theme;
     };
   };
 

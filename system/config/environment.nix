@@ -11,6 +11,9 @@
     # AMD CPU
     WINE_CPU_TOPOLOGY = "16:0-15";
 
+    # Gnome desktop
+    MUTTER_DEBUG_FORCE_KMS_MODE = "simple";
+
     # Fcitx5 variables — Wayland-safe
     #GTK_IM_MODULE = "fcitx";   # For gnome
     QT_IM_MODULE = "fcitx";

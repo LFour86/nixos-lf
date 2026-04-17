@@ -8,6 +8,17 @@
     wlr.enable = true;
   };
 
+  # Logind
+  services.logind = {
+    settings = {
+      Login = { 
+        HandleLidSwitch = "lock";
+        HandleLidSwitchExternalPower = "lock";
+        HandleLidSwitchDocked = "ignore";
+      };
+    };
+  };
+
   # Profiling (with sysprof) 
   services.sysprof.enable = true;
 

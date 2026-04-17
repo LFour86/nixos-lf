@@ -6,6 +6,9 @@
 
   # Zram (but no hibernate)
   zramSwap.enable = true;
+
+  # Nohang
+  #services.nohang.enable = true;
  
   # PPD
   services.power-profiles-daemon.enable = true;

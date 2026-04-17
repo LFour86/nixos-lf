@@ -6,34 +6,38 @@
   # Enable OpenGL
   hardware.graphics.enable = true;
 
-  # NVIDIA Driver version
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.latest;
-
-  # NVIDIA Container
-  #hardware.nvidia-container-toolkit.enable = true;
-
-  # NVIDIA Prime
-  #hardware.nvidia.prime = {
-    #offload = {
-      #enable = true;
-      #enableOffloadCmd = true;
-    #};
-    # Make sure to use the correct Bus ID values for your system!
-    #amdgpuBusId = "PCI:6:0:0";
-    #nvidiaBusId = "PCI:1:0:0";
-  #};
-	
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];
-  
-  hardware.nvidia.modesetting.enable = true;
-  hardware.nvidia.powerManagement.enable = false;
-  hardware.nvidia.powerManagement.finegrained = false;
-  hardware.nvidia.open = true;
-  hardware.nvidia.nvidiaSettings = true;
+ 
+  # Nvidia hardware settings
+  hardware.nvidia = {
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
+    modesetting.enable = true;
+    dynamicBoost.enable = true;
+    powerManagement = {
+      enable = true;
+      finegrained = false;
+    };
+    open = true;
+    nvidiaSettings = true;
+    videoAcceleration = true;
+    #prime = {
+      #offload = {
+        #enable = true;
+        #enableOffloadCmd = true;
+      #};
+      # Make sure to use the correct Bus ID values for your system!
+      #amdgpuBusId = "PCI:6:0:0";
+      #nvidiaBusId = "PCI:1:0:0";
+    #};
+  };
+
+  #hardware.nvidia-container-toolkit = {
+    #enable = false;
+  #};
  
   # Bootloader
-  boot.initrd.kernelModules = [ "nvidia" ];
+  boot.initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_drm" "nvidia_uvm" ];
   
   # Fixed
   #boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
@@ -46,6 +50,7 @@
     "nvidia-drm.fbdev=1"
     "nvidia.NVreg_TemporaryFilePath=/var/tmp"
     "transparent_hugepage=always"
+    "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
   ];
     
   #Screen Tearing Issues

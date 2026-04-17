@@ -16,6 +16,12 @@
     capSysNice = true;
   };
 
+  # Appimage
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+
   # Steam
   programs.steam = {
     enable = true;

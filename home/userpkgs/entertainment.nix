@@ -8,10 +8,8 @@ let
 in
 {
   home.packages = with pkgs;[
-    bilibili-local
-    musicpod
+    bilibili
     sillytavern
-    unstable-pkgs.spotify
     unstable-pkgs.lutris
     unstable-pkgs.protonplus
   ];

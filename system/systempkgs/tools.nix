@@ -41,9 +41,11 @@
     # Media
     ffmpeg-full
     
-    # Misc
-    cmus
-    sl
+    # Rust
+    dioxus-cli
+    
+    # Flatpak
+    flatpak-builder
   ];
 }
 

@@ -33,7 +33,9 @@
         # Proper nixpkgs configuration module
         {
           nixpkgs = {
-            overlays = import ./overlays;
+            overlays = [
+              (import ./overlays)
+            ];
             config.allowUnfree = true;
           };
         }
