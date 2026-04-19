@@ -19,7 +19,6 @@ pkgs.appimageTools.wrapType2 {
     for desktop in ${appimageContents}/*.desktop; do
       if [ -f "$desktop" ]; then
         desktopname=$(basename "$desktop")
-        echo "找到 desktop: $desktopname"
         install -m 444 -D "$desktop" -t $out/share/applications
 
         # Change Exec=AppRun to Exec=bilibili
