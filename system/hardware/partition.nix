@@ -18,23 +18,23 @@
   environment.persistence."/persist" = {
     hideMounts = true;
     directories = [
+      # suggested subdirectory breakdown
       "/etc/nixos"
-      "/var/log"
-      #"/var/lib"  # suggested subdirectory breakdown
-      "/var/lib/nixos"
-      "/var/lib/bluetooth"
-      "/var/lib/systemd/coredump"
-      "/var/lib/systemd/random-seed"
-      "/var/lib/libvirt"
-      "/var/lib/docker"
-      "var/lib/NetworkManager"
-      "/var/lib/systemd/linger"
-      "/var/lib/systemd/backlight"
-
       "/etc/NetworkManager/system-connections"
 
       # If use SSH
-      "/etc/ssh"
+      #"/etc/ssh"
+
+      "/var/log"
+      "/var/lib/nixos"
+      "/var/lib/bluetooth"
+      "/var/lib/docker"
+      "/var/lib/libvirt"
+      "var/lib/NetworkManager"
+      "/var/lib/systemd/backlight"
+      "/var/lib/systemd/coredump"
+      "/var/lib/systemd/linger"
+      "/var/lib/systemd/random-seed"
     ];
     files = [
       "/etc/machine-id"
