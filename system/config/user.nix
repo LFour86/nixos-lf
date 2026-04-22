@@ -15,6 +15,7 @@ in
         hashedPasswordFile = "/persist/passwords/root";
       };
       lfour = {
+        uid = 1000;
         isNormalUser = true;
         hashedPasswordFile = "/persist/passwords/lfour";
         description = "LFour";
