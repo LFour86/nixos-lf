@@ -27,9 +27,9 @@
       "/var/lib/systemd/random-seed"
       "/var/lib/libvirt"
       "/var/lib/docker"
-      #"var/lib/NetworkManager"
-      #"var/lib/lastlog"
-      #"/var/lib/systemd/linger"
+      "var/lib/NetworkManager"
+      "/var/lib/systemd/linger"
+      "/var/lib/systemd/backlight"
 
       "/etc/NetworkManager/system-connections"
 
