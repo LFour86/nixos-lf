@@ -7,12 +7,20 @@ let
   };
 in
 {
-  # Define a user account.
-  users.users.lfour = {
-    isNormalUser = true;
-    description = "LFour";
-    extraGroups = [ "networkmanager" "wheel" "dialout"  "libvirtd" "video" "plugdev" "docker" "resolvconf" ];
-    shell = unstable-pkgs.nushell;
+  # Define user account.
+  users = {
+    mutableUsers = false;
+    users = {
+      root = {
+        initialPassword = "your_password";
+      };
+      lfour = {
+        isNormalUser = true;
+        initialPassword = "your_password";
+        description = "LFour";
+        extraGroups = [ "networkmanager" "wheel" "dialout"  "libvirtd" "video" "audio" "plugdev" "docker" "resolvconf" ];
+        shell = unstable-pkgs.nushell;
+      }
+    };
   };
 }
-

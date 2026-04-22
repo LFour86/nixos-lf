@@ -3,8 +3,18 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    
+
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    impermanence = {
+      url = "github:nix-community/impermanence";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -17,7 +27,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, disko, impermanence, home-manager, ... }@inputs:
   let
     system = "x86_64-linux";
   in {
@@ -47,18 +57,21 @@
             useGlobalPkgs = true;
             useUserPackages = true;
             backupFileExtension = "backup";
-            
+
             extraSpecialArgs = {
               inherit inputs;
-            
+
             };
             users.lfour = {
               imports = [ ./home ];
             };
           };
         }
+
+        # File System
+        disko.nixosModules.default
+        impermanence.nixosModules.impermanence
       ];
     };
   };
 }
-
