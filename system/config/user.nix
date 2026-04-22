@@ -12,11 +12,11 @@ in
     mutableUsers = false;
     users = {
       root = {
-        initialPassword = "your_password";
+        hashedPasswordFile = "/persist/passwords/root";
       };
       lfour = {
         isNormalUser = true;
-        initialPassword = "your_password";
+        hashedPasswordFile = "/persist/passwords/lfour";
         description = "LFour";
         extraGroups = [ "networkmanager" "wheel" "dialout"  "libvirtd" "video" "audio" "plugdev" "docker" "resolvconf" ];
         shell = unstable-pkgs.nushell;
