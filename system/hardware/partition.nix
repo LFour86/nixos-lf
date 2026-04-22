@@ -21,6 +21,7 @@
       "/etc/nixos"
       "/var/log"
       #"/var/lib"  # suggested subdirectory breakdown
+      "/var/lib/nixos"
       "/var/lib/bluetooth"
       "/var/lib/systemd/coredump"
       "/var/lib/systemd/random-seed"
