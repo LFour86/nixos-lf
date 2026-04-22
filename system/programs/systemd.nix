@@ -9,44 +9,35 @@
     boot.initrd.systemd.services.rollback = {
       description = "Rollback BTRFS root subvolume to a pristine state";
       wantedBy = [ "initrd.target" ];
-      after = [ "systemd-cryptsetup@enc.service" ]; # Run after LUKS partition is decrypted
+      after = [ "systemd-cryptsetup@enc.service" ];
       before = [ "sysroot.mount" ];
       unitConfig.DefaultDependencies = "no";
       serviceConfig.Type = "oneshot";
       script = ''
+        export PATH=/bin:/sbin:/usr/bin:/usr/sbin:$PATH
         set -euo pipefail
 
-        # Create a temporary mount point
         mkdir -p /btrfs_tmp
-
-        # Mount the BTRFS root (subvolid=5) to access all subvolumes
         mount -o subvolid=5 /dev/mapper/enc /btrfs_tmp
 
-        # Check if the root subvolume exists
-        if [[ -d /btrfs_tmp/root ]]; then
-          echo "Cleaning up existing root subvolume and its children..."
-
-          # List all subvolumes under /root, extract paths, sort in reverse order (deepest first)
-          # and delete them one by one to avoid "directory not empty" errors
-          btrfs subvolume list -o /btrfs_tmp/root | awk '{print $NF}' | sort -r | while read -r subvolume; do
-            echo "Deleting nested subvolume: $subvolume"
-            btrfs subvolume delete "/btrfs_tmp/$subvolume"
-          done
-
-          # Finally delete the root subvolume itself
-          echo "Deleting /root subvolume..."
-          btrfs subvolume delete /btrfs_tmp/root
+        # Ensure /sysroot is not mounted before we delete the subvolume
+        if mountpoint -q /sysroot 2>/dev/null; then
+          echo "Warning: /sysroot is already mounted, unmounting it to avoid conflicts..."
+          umount /sysroot || true
         fi
 
-        # Create a new, empty root subvolume for a fresh boot
+        if [[ -d /btrfs_tmp/root ]]; then
+          echo "Removing existing root subvolume and all descendants recursively..."
+          btrfs subvolume delete -R /btrfs_tmp/root
+        fi
+
         echo "Creating new pristine root subvolume..."
         btrfs subvolume create /btrfs_tmp/root
 
-        # Clean up: unmount and remove the temporary directory
         umount /btrfs_tmp
         rmdir /btrfs_tmp
-      '';
-    };
+    '';
+  };
 
   # Load ntsync later to avoid race condition
   systemd.services.ntsync = {
