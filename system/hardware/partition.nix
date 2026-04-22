@@ -44,4 +44,8 @@
   boot.kernelParams = [
     "dm_mod.dm_mq_queue_depth=2048"
   ];
+
+  environment.systemPackages = with pkgs; [
+    btrfs-progs disko tpm2-tools
+  ];
 }
