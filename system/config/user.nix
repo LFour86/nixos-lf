@@ -21,7 +21,7 @@ in
         description = "LFour";
         extraGroups = [ "networkmanager" "wheel" "dialout"  "libvirtd" "video" "audio" "plugdev" "docker" "resolvconf" ];
         shell = unstable-pkgs.nushell;
-      }
+      };
     };
   };
 }
