@@ -51,17 +51,22 @@
     };
   };
 
-  # Device node permissions (for Proton access)
-  services.udev.extraRules = ''
-    KERNEL=="ntsync", MODE="0666", TAG+="uaccess"
-  '';
-
   # NVIDIA powed service
   systemd.services.nvidia-powerd = {
     after = [ "nvidia-persistenced.service" "multi-user.target" ];
     wantedBy = lib.mkForce [ "multi-user.target" ];
     serviceConfig = {
       ExecStartPre = "${pkgs.bash}/bin/bash -c 'while [ ! -e /dev/nvidiactl ]; do sleep 0.5; done'";
+    };
+  };
+
+  # Restrict CPU frequency scaling permissions 
+  systemd.services.cpufreq-restrict = {
+    description = "Restrict CPU scaling file access";
+    after = [ "sys-kernel-debug.mount" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.coreutils}/bin/chmod 444 /sys/devices/system/cpu/cpu*/cpufreq/scaling_setspeed";
     };
   };
 

@@ -27,7 +27,9 @@ in
 
     # Enable Docker
     docker = {
+      package = unstable-pkgs.docker;
       enable = true;
+      storageDriver = "btrfs";
       rootless = {
         enable = true;
         setSocketVariable = true;
@@ -50,18 +52,15 @@ in
 
   environment.systemPackages = with pkgs; [
     # Docker container
-    docker-client docker-compose docui
+    unstable-pkgs.docker-client unstable-pkgs.docker-compose
     
     # Podman Container
-    dive #podman podman-tui 
+    unstable-pkgs.dive #podman podman-tui 
     #podman-desktop podman-compose pods
 
     # Kubernetes
     kubernetes kubectl kubernetes-helm-wrapped
     kubernetes-validate
-
-    # Linux to Linux
-    unstable-pkgs.distrobox unstable-pkgs.distroshelf 
 
     # Linux to Android
     unstable-pkgs.waydroid unstable-pkgs.waydroid-helper unstable-pkgs.nftables

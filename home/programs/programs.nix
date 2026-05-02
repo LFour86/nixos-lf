@@ -1,9 +1,15 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
+let
+  unstable-pkgs = import inputs.nixpkgs-unstable {
+    system = pkgs.stdenv.hostPlatform.system;
+    config.allowUnfree = true;
+  };
+in
 {
   programs.vscode = {
     enable = true;
-    package = pkgs.vscode.override {
+    package = unstable-pkgs.vscode.override {
       commandLineArgs = [
         "--ozone-platform=wayland"
         "--enable-wayland-ime"
@@ -27,6 +33,14 @@
       ms-python.pylint
       ms-python.vscode-pylance
       platformio.platformio-vscode-ide
+    ];
+  };
+
+  programs.zed-editor = {
+    package = unstable-pkgs.zed-editor;
+    enable = true;
+    extensions = [ 
+      "nix"
     ];
   };
 

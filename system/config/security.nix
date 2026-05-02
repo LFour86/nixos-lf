@@ -95,6 +95,11 @@
 
   # OOM Protection
   systemd.oomd.enable = true;
+  services.earlyoom = {
+    enable = true;
+    freeMemThreshold = 5;
+    freeSwapThreshold = 5;
+  };
 
   # Removable media / desktop integration
   services.gvfs.enable = true;

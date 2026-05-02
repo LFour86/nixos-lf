@@ -17,7 +17,7 @@ in
     octaveFull
     stm32cubemx
     unstable-pkgs.opencode
-    unstable-pkgs.zed-editor
+    #unstable-pkgs.zed-editor
   ];
 }
 

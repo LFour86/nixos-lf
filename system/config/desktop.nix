@@ -16,8 +16,7 @@
 
     # KDE
     #desktopManager.plasma6.enable = true;
-    #displayManager.sddm.enable = true;
-    #displayManager.sddm.wayland.enable = true;
+    #displayManager.plasma-login-manager.enable = true;
   };
   
   services.udev.packages = with pkgs; [ 
@@ -74,6 +73,7 @@
     # KDE
     #kdePackages.dolphin
     #kdePackages.dolphin-plugins
+    kdePackages.wallpaper-engine-plugin
     wayland-utils # Wayland utilities
 
     # Niri

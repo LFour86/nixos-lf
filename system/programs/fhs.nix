@@ -86,6 +86,8 @@ in
         "--bind" "/run/udev" "/run/udev"
         "--bind-try" "/var/run/dbus" "/var/run/dbus"
         "--dev-bind" "/dev" "/dev"
+        "--bind" "/sys" "/sys"
+        "--bind" "/proc" "/proc"
       ];
       runScript = "bash";
       profile = ''
@@ -151,34 +153,5 @@ in
       #'';
     #})
   ];
-
-  # udev rules (USB)
-  services.udev.extraRules = ''
-    # FTDI
-    ATTRS{idVendor}=="0403", TAG+="uaccess"
-    
-    # CP210x (Silabs)
-    ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", TAG+="uaccess"
-    ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea70", TAG+="uaccess"
-    
-    # CH340/CH341
-    ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", TAG+="uaccess"
-    ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="5523", TAG+="uaccess"
-    
-    # Prolific PL2303
-    ATTRS{idVendor}=="067b", ATTRS{idProduct}=="2303", TAG+="uaccess"
-
-    # ST-Link/V2, V2-1, V3
-    ATTRS{idVendor}=="0483", ATTRS{idProduct}=="3748", TAG+="uaccess"
-    ATTRS{idVendor}=="0483", ATTRS{idProduct}=="374b", TAG+="uaccess"
-    ATTRS{idVendor}=="0483", ATTRS{idProduct}=="3752", TAG+="uaccess"
-  
-    # J-Link
-    ATTRS{idVendor}=="1366", ATTRS{idProduct}=="0101", TAG+="uaccess"
-    ATTRS{idVendor}=="1366", ATTRS{idProduct}=="0105", TAG+="uaccess"
-    
-    # Altera USB Blaster
-    ATTRS{idVendor}=="09fb", ATTRS{idProduct}=="6001", TAG+="uaccess"
-  '';
 }
 

@@ -8,9 +8,9 @@ let
 in
 {
   home.packages = with pkgs;[
-    wechat-uos 
-    wemeet
-    (qq.override {
+    #unstable-pkgs.wechat-uos 
+    unstable-pkgs.wemeet
+    (unstable-pkgs.qq.override {
       commandLineArgs = [
         "--ozone-platform=wayland"
         "--enable-wayland-ime"
