@@ -46,7 +46,6 @@
             { id = "plugin:ip-monitor"; }
             { id = "plugin:air-quality"; }
             { id = "plugin:latency-monitor"; }
-            { id = "plugin:linux-wallpaperengine-controller"; }
             { id = "Bluetooth"; displayMode = "onhover"; iconColor = "none"; textColor = "none"; }
             { id = "plugin:usb-drive-manager"; }
             { blacklist = []; chevronColor = "none"; colorizeIcons = false; drawerEnabled = true; hidePassive = false; id = "Tray"; pinned = []; }
@@ -58,6 +57,7 @@
             { id = "plugin:catwalk"; }
             { id = "plugin:privacy-indicator"; }
             { id = "plugin:screen-toolkit"; }
+            { id = "plugin:linux-wallpaperengine-controller"; }
             { id = "plugin:color-scheme-creator"; }
             { id = "plugin:assistant-panel"; }
             { id = "plugin:simple-notes"; }
