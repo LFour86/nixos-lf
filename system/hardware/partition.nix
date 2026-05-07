@@ -51,6 +51,13 @@
     "dm_mod.dm_mq_queue_depth=2048"
   ];
 
+  boot.initrd.availableKernelModules = [ "tpm" "tpm_tis" "tpm_crb" ];
+    
+  boot.initrd.systemd.extraBin = {
+    cryptsetup = "${pkgs.cryptsetup}/bin/cryptsetup";
+    tpm2_pcrread = "${pkgs.tpm2-tools}/bin/tpm2_pcrread";
+  };
+
   environment.systemPackages = with pkgs; [
     btrfs-progs disko tpm2-tools
   ];

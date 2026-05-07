@@ -57,8 +57,8 @@
             { id = "plugin:catwalk"; }
             { id = "plugin:privacy-indicator"; }
             { id = "plugin:screen-toolkit"; }
-            { id = "plugin:linux-wallpaperengine-controller"; }
             { id = "plugin:color-scheme-creator"; }
+            { id = "plugin:linux-wallpaperengine-controller"; }
             { id = "plugin:assistant-panel"; }
             { id = "plugin:simple-notes"; }
             { id = "plugin:todo"; }
@@ -431,7 +431,7 @@
 
       # Color Schemes
       colorSchemes = {
-        useWallpaperColors = false;
+        useWallpaperColors = true;
         predefinedScheme = "Ayu";
         darkMode = true;
         schedulingMode = "off";
@@ -594,9 +594,9 @@
   # State File
   home.file.".cache/noctalia/wallpapers.json" = {
     text = builtins.toJSON {
-      defaultWallpaper = "${../../wallpapers/atri.png}";
+      defaultWallpaper = "${../../wallpapers/blue.png}";
       wallpapers = {
-        "eDP-1" = "${../../wallpapers/atri.png}";
+        "eDP-1" = "${../../wallpapers/blue.png}";
       };
     };
   };

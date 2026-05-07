@@ -9,7 +9,7 @@ in
 {
   home.packages = with pkgs;[
     #unstable-pkgs.wechat-uos 
-    unstable-pkgs.wemeet
+    #unstable-pkgs.wemeet
     (unstable-pkgs.qq.override {
       commandLineArgs = [
         "--ozone-platform=wayland"

@@ -15,10 +15,7 @@ in
 
     # OpenGL
     hardware.graphics = {
-      enable32Bit = true;
       extraPackages = with pkgs; [
-        libva
-        libva-utils
         rocmPackages.clr.icd
         ];
     };

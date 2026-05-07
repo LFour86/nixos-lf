@@ -8,6 +8,14 @@
     # Fix cursor glitches on some GPUs (Wayland)
     WLR_NO_HARDWARE_CURSORS = "1";
 
+    # NVIDIA
+    LIBVA_DRIVER_NAME = "nvidia";
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+
+    # Firefox
+    MOZ_DISABLE_RDD_SANDBOX = "1";
+
     # AMD CPU
     WINE_CPU_TOPOLOGY = "16:0-15";
 

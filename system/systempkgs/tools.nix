@@ -33,6 +33,9 @@
     fastfetch
     lm_sensors
 
+    # Hardware
+    vdpauinfo
+
     # Editors
     neovim
     vim

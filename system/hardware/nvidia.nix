@@ -4,7 +4,26 @@
   nixpkgs.config.nvidia.acceptLicense = true;
 
   # Enable OpenGL
-  hardware.graphics.enable = true;
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    extraPackages = with pkgs; [
+      libva 
+      libva-utils
+      libva-vdpau-driver
+      libvdpau
+      libvdpau-va-gl
+      nvidia-vaapi-driver
+    ];
+    extraPackages32 = with pkgs; [
+      libva 
+      libva-utils
+      libva-vdpau-driver
+      libvdpau
+      libvdpau-va-gl
+      nvidia-vaapi-driver
+    ];
+  };
 
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];
@@ -32,7 +51,6 @@
     #};
   };
 
-
   hardware.nvidia-container-toolkit = {
     enable = false;
   };
@@ -57,20 +75,32 @@
   #Screen Tearing Issues
   #hardware.nvidia.forceFullCompositionPipeline = true;
 
-  environment.systemPackages = with pkgs.cudaPackages; [
-    # Compilation & Runtime
-    cuda_nvcc        # CUDA compiler for JIT extensions
-    cuda_cudart      # Core CUDA runtime library
-    cuda_nvrtc       # Runtime compilation for dynamic kernels
+  environment.systemPackages = with pkgs; [
+    # Vulkan
+    vulkan-caps-viewer 
+    vulkan-extension-layer 
+    vulkan-headers 
+    vulkan-loader 
+    vulkan-memory-allocator 
+    vulkan-tools 
+    vulkan-tools-lunarg 
+    vulkan-utility-libraries 
+    vulkan-validation-layers 
+    vulkan-volk 
 
-    # Deep Learning Kernels
-    libcublas        # High-performance BLAS for matrix multiplication
-    cudnn            # Accelerated primitives for deep neural networks
+    # CUDA Compilation & Runtime
+    cudaPackages.cuda_nvcc        # CUDA compiler for JIT extensions
+    cudaPackages.cuda_cudart      # Core CUDA runtime library
+    cudaPackages.cuda_nvrtc       # Runtime compilation for dynamic kernels
 
-    # Math & Development Utilities
-    libcurand        # Random number generation
-    libcusolver      # Numerical solver for linear systems
-    cuda_nvtx        # Instrumentation for performance profiling
+    # CUDA Deep Learning Kernels
+    cudaPackages.libcublas        # High-performance BLAS for matrix multiplication
+    cudaPackages.cudnn            # Accelerated primitives for deep neural networks
+
+    # CUDA Math & Development Utilities
+    cudaPackages.libcurand        # Random number generation
+    cudaPackages.libcusolver      # Numerical solver for linear systems
+    cudaPackages.cuda_nvtx        # Instrumentation for performance profiling
   ];
 }
 
