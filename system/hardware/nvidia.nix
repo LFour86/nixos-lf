@@ -69,7 +69,6 @@
     "nvidia-drm.fbdev=1"
     "nvidia.NVreg_TemporaryFilePath=/var/tmp"
     "transparent_hugepage=always"
-    "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
   ];
     
   #Screen Tearing Issues

@@ -50,6 +50,23 @@
     XDG_RUNTIME_DIR = "/run/user/1000";
   };
 
+  # KMSCon
+  services.kmscon = {
+    enable = true;
+    fonts = [ { name = "Maple Mono NF CN"; package = pkgs.maple-mono.NF-CN; } ];
+    extraConfig = ''
+      font-engine=pango
+      font-size=12
+      mouse=on
+    '';
+  };
+
+  # Firmware Updates
+  services.fwupd.enable = true;
+
+  # CUPS printing
+  services.printing.enable = true;
+
   #services.xrdp = {
     #enable = true;
     #audio.enable = true;
@@ -85,6 +102,9 @@
 
     # FTDI
     ATTRS{idVendor}=="0403", TAG+="uaccess"
+
+    # ADB
+    SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", MODE="0666", GROUP="plugdev"
     
     # CP210x (Silabs)
     ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", TAG+="uaccess"

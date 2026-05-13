@@ -6,9 +6,10 @@
     bear
     cmake
     coreutils-full
-    direnv
     devenv
     gnumake
+    pkg-config
+    pkgconf
     meson
     ninja
 

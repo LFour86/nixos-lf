@@ -52,14 +52,14 @@
   programs.firejail = {
     enable = true;
     wrappedBinaries = {
-      firefox = {
-        executable = "${lib.getBin pkgs.firefox}/bin/firefox";
-        profile = "${pkgs.firejail}/etc/firejail/firefox.profile";
-      };
-      google-chrome = {
-        executable = "${lib.getBin pkgs.google-chrome}/bin/google-chrome";
-        profile = "${pkgs.firejail}/etc/firejail/google-chrome.profile";
-      };
+      #firefox = {
+        #executable = "${lib.getBin pkgs.firefox}/bin/firefox";
+        #profile = "${pkgs.firejail}/etc/firejail/firefox.profile";
+      #};
+      #google-chrome = {
+        #executable = "${lib.getBin pkgs.google-chrome}/bin/google-chrome";
+        #profile = "${pkgs.firejail}/etc/firejail/google-chrome.profile";
+      #};
       mpv = {
         executable = "${lib.getBin pkgs.mpv}/bin/mpv";
         profile = "${pkgs.firejail}/etc/firejail/mpv.profile";
@@ -97,8 +97,8 @@
   systemd.oomd.enable = true;
   services.earlyoom = {
     enable = true;
-    freeMemThreshold = 5;
-    freeSwapThreshold = 5;
+    freeMemThreshold = 10;
+    freeSwapThreshold = 10;
   };
 
   # Removable media / desktop integration

@@ -24,33 +24,7 @@
     dates = ["daily"];
   };
 
-  # Nix Index
-  programs.nix-index = {
-    enable = true;
-    enableFishIntegration = true;
-    enableBashIntegration = true;
-  };
-  programs.command-not-found.enable = false;
-
-  # FZF
-  programs.fzf.fuzzyCompletion = true;
-
   time.timeZone = "Asia/Shanghai";
-
-  services.kmscon = {
-    enable = true;
-    fonts = [ { name = "Maple Mono NF CN"; package = pkgs.maple-mono.NF-CN; } ];
-    extraConfig = ''
-      font-engine=pango
-      font-size=12
-    '';
-  };
-
-  # Firmware Updates
-  services.fwupd.enable = true;
-
-  # CUPS printing
-  services.printing.enable = true;
 
   # Valid font config for Chinese + English + Nerd Fonts
   fonts = {

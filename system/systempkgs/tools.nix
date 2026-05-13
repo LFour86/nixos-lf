@@ -1,11 +1,23 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
+let
+  unstable-pkgs = import inputs.nixpkgs-unstable {
+    system = pkgs.stdenv.hostPlatform.system;
+    config.allowUnfree = true;
+  };
+in
 {
   environment.systemPackages = with pkgs; [
+    # Base libs
+    openssl
+    unstable-pkgs.glibc
+
     # Base cli
     bat
+    duf
     fd
     file
+    iotop 
     lsd
     lshw
     lsof

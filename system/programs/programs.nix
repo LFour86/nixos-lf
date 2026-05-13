@@ -1,4 +1,4 @@
-{ ... }: 
+{ pkgs, ... }: 
 
 {
   # Enable Java
@@ -6,6 +6,18 @@
   
   # Enable Direnv
   programs.direnv.enable = true;
+
+  
+  # Nix Index
+  programs.nix-index = {
+    enable = true;
+    enableFishIntegration = true;
+    enableBashIntegration = true;
+  };
+  programs.command-not-found.enable = false;
+
+  # FZF
+  programs.fzf.fuzzyCompletion = true;
 
   # Gamemode
   programs.gamemode.enable = true;
@@ -34,6 +46,15 @@
   environment.variables.EDITOR = "nvim";
 
   # Nix-ld: Run closed-source Binary
-  programs.nix-ld.enable = true;
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      gcc
+      llvm
+      stdenv.cc.cc.lib
+      udev
+      wayland
+    ];
+  };
 }
 

@@ -1,6 +1,6 @@
 {
   imports = [
-    ./screen.nix
+    ./v4l2loopback.nix
   ];
 }
 

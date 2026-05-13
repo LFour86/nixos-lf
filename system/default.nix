@@ -5,6 +5,9 @@
     
     # PC hardware
     ./hardware
+
+    # Kernel modules
+    ./modules
     
     # Programs and services
     ./programs

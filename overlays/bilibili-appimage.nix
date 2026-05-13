@@ -41,7 +41,7 @@ pkgs.appimageTools.wrapType2 {
 
         # Change Exec=AppRun to Exec=bilibili
         substituteInPlace $out/share/applications/$desktopname \
-          --replace-fail 'Exec=AppRun' 'Exec=bash -lc "exec ${pname}" --disable-gpu' 
+          --replace-fail 'Exec=AppRun' 'Exec=bash -lc "exec ${pname}"' 
       fi
     done
 
