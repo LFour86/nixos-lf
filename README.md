@@ -18,7 +18,6 @@ A declarative NixOS system configuration using Nix flakes, featuring a customize
 - **Desktop Environment**: Niri Wayland compositor with Noctalia shell, GNOME and COSMIC 
 - **File System**: BTRFS with LUKS2
 - **Shell**: Nushell with custom config
-- **Browser**: Firefox Browser and Google Chrome
 - **System Management**: Home Manager for user configuration
 - **Hardware Support**: NVIDIA, AMDGPU, Bluetooth, audio, and other hardware configurations
 - **Security**: SSH, firewall, and security hardening
@@ -58,6 +57,7 @@ A declarative NixOS system configuration using Nix flakes, featuring a customize
 └── system/                # System-wide configuration
     ├── config/            # System configs
     ├── hardware/          # Hardware-specific configurations
+    ├── modules/           # Kernel modules configurations
     ├── programs/          # System programs and services
     └── systempkgs/        # System packages
 ```
