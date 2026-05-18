@@ -57,7 +57,6 @@
     extraConfig = ''
       font-engine=pango
       font-size=12
-      mouse=on
     '';
   };
 

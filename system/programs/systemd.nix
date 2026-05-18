@@ -70,6 +70,75 @@
     };
   };
 
+  # Network PAC
+  systemd.services.pacproxy = {
+    description = "PAC Proxy for Nix";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      User = "lfour";
+      Group = "users";
+      StateDirectory = "pacproxy";
+      
+      # Internal implementation of persistent loop monitoring
+      ExecStart = "${pkgs.writeShellScript "pacproxy-launcher" ''
+        current_status="none"
+        pacproxy_pid=""
+
+        # When the service is stopped (systemctl stop), ensure that the background pacproxy core process is cleanly killed.
+        cleanup() {
+          echo "Stopping pacproxy supervisor..."
+          if [ -n "$pacproxy_pid" ]; then
+            kill "$pacproxy_pid"
+          fi
+          exit 0
+        }
+        trap cleanup TERM INT
+
+        # Entering an infinite health check loop
+        while true; do
+          # Attempting to probe Clash-Verge's PAC
+          if ${pkgs.curl}/bin/curl -sf -m 2 http://127.0.0.1:33331/commands/pac > /var/lib/pacproxy/original.pac; then
+            new_status="proxy"
+            ${pkgs.gnused}/bin/sed 's/SOCKS5[^;]*;//g' /var/lib/pacproxy/original.pac > /var/lib/pacproxy/filtered.pac
+          # If Clash is not enabled, dynamically generate a pseudo-PAC file with a pure direct connection.
+          else
+            new_status="direct"
+            echo 'function FindProxyForURL(url, host) { return "DIRECT"; }' > /var/lib/pacproxy/filtered.pac
+          fi
+
+          # If the agent status changes are detected
+          if [ "$new_status" != "$current_status" ]; then
+            echo "Proxy status changed from [$current_status] to [$new_status]. Reloading pacproxy..."
+            
+            # If the old pacproxy is still running, kill it first.
+            if [ -n "$pacproxy_pid" ]; then
+              kill "$pacproxy_pid"
+              wait "$pacproxy_pid" 2>/dev/null
+            fi
+
+            # Start pacproxy in the background with the new PAC rules
+            ${pkgs.pacproxy}/bin/pacproxy -l 127.0.0.1:33332 -c /var/lib/pacproxy/filtered.pac -v &
+            pacproxy_pid=$!
+            
+            current_status="$new_status"
+          fi
+
+          # Check every 5 seconds
+          sleep 5
+        done
+      ''
+      }";
+
+      Environment = [
+        "no_proxy=127.0.0.1,localhost,::1"
+        "NO_PROXY=127.0.0.1,localhost,::1"
+      ];
+      Restart = "always";
+      RestartSec = "5";
+    };
+  };
+
   # Flatpak
   systemd.services.flatpak-repo = {
     wantedBy = [ "multi-user.target" ];
@@ -78,5 +147,11 @@
       flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && flatpak remote-modify flathub --url=https://mirrors.ustc.edu.cn/flathub
     '';
   };
+
+  environment.systemPackages = with pkgs; [ 
+    curl
+    gnused
+    pacproxy 
+  ];
 }
 

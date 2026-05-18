@@ -1,5 +1,11 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
+let
+  unstable-pkgs = import inputs.nixpkgs-unstable {
+    system = pkgs.stdenv.hostPlatform.system;
+    config.allowUnfree = true;
+  };
+in
 {
   environment.systemPackages = with pkgs; [
     # Build tools
@@ -24,8 +30,10 @@
     llvmPackages_latest.libcxx
     llvmPackages_latest.libllvm
 
+    # Android
+    #unstable-pkgs.androidsdk
+
     # GTK3 && GTK4
-    gsettings-desktop-schemas
     gtk3
     gtk4
 

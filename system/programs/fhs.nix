@@ -2,6 +2,7 @@
 
 let
   #tdRoot = "/home/lfour/FHS/TD_4.6.7_Linux";
+  MatlabRoot = "/home/lfour/FHS/MATLAB";
   XilinxRoot = "/home/lfour/FHS/Xilinx";
 in
 {
@@ -51,12 +52,14 @@ in
         export QT_QPA_PLATFORM=xcb           # force X11 over Wayland
         export GDK_BACKEND=x11
         export LIBGL_ALWAYS_INDIRECT=1       # sometimes helps if GL probing fails
+        export LD_LIBRARY_PATH="${MatlabRoot}/bin/glnxa64/:$LD_LIBRARY_PATH"
       '';
     })
 
     # Xilinx FHS
     (buildFHSEnvBubblewrap {
       name = "vivado-fhs";
+      chdir = "/home/lfour/FHS/Xilinx/";
       targetPkgs = pkgs: with pkgs; [
         # Basic Tools & Shell
         bash bc coreutils

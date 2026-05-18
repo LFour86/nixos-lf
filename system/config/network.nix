@@ -1,10 +1,16 @@
 { pkgs, ... }:
 
 {
-  # Enable networking
-  networking.hostName = "nixos"; # Define hostname.
-  networking.networkmanager.enable = true;
-  networking.resolvconf.enable = false;
+  # Networking
+  networking = {
+    hostName = "nixos";      # Define hostname.
+    networkmanager.enable = true;
+    resolvconf.enable = false;
+    proxy = {
+      default = "http://127.0.0.1:33332/";
+      noProxy = "127.0.0.1,localhost,::1,10.0.0.0/8,192.168.0.0/16,*.local,.ustc.edu.cn,cache.nixos.org";
+    };
+  };
 
   # BCC
   programs.bcc.enable = true;

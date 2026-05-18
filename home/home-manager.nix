@@ -5,8 +5,11 @@
   programs.home-manager.enable = true;
   
   # Users settings
-  home.username = "lfour";
-  home.homeDirectory = "/home/lfour";
+  home = {
+    username = "lfour";
+    homeDirectory = "/home/lfour";
+    sessionPath = [ "$HOME/.local/bin" ];
+  };
 
   # Home-Manager version
   home.stateVersion = "25.11";

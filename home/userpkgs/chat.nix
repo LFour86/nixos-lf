@@ -8,8 +8,10 @@ let
 in
 {
   home.packages = with pkgs;[
+    discord
     #unstable-pkgs.wechat-uos 
     #unstable-pkgs.wemeet
+    telegram-desktop
     (unstable-pkgs.qq.override {
       commandLineArgs = [
         "--ozone-platform=wayland"

@@ -1,5 +1,11 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
+let
+  unstable-pkgs = import inputs.nixpkgs-unstable {
+    system = pkgs.stdenv.hostPlatform.system;
+    config.allowUnfree = true;
+  };
+in
 {
   # Dconf
   programs.dconf.enable = true;
@@ -7,7 +13,7 @@
   # Desktop Evironment 
   services = {
     # Gnome
-    #gnome.gnome-keyring.enable = true;
+    gnome.gnome-keyring.enable = true;
     desktopManager = {
       # GNOME 
       #gnome.enable = true;
@@ -23,25 +29,36 @@
       #};
     };
     displayManager = {
-      #defaultSession = "gnome";
+      defaultSession = "plasma";
       
       # GDM 
-      #gdm = {
-        #enable = true;
-        #wayland = true;
-      #};
+      gdm = {
+        enable = true;
+        wayland = true;
+      };
 
       # PLM 
       #plasma-login-manager.enable = true;
 
       # SDDM
-      sddm = {
-        enable = true;
-        wayland.enable = true;
-      };
+      #sddm = {
+        #enable = true;
+        #wayland.enable = true;
+      #};
     };
   };
-  
+
+  # LabWC Desktop
+  #programs.labwc = {
+    #enable = true;
+    #package = unstable-pkgs.labwc;
+  #};
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
+  };
+
   services.udev.packages = with pkgs; [ 
     #pkgs.gnome-settings-daemon
   ];
@@ -91,6 +108,7 @@
     #baobab
     #nautilus
     #nautilus-open-any-terminal
+    gnome-calculator
     #gnome-software
     
     # KDE
