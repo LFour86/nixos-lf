@@ -72,7 +72,7 @@ A declarative NixOS system configuration using Nix flakes, featuring a customize
 
 ## Dependencies
 
-- NixOS 25.11 and unstable
+- NixOS 26.05 and unstable
 - Home Manager
 - Noctalia shell
 - Disko
