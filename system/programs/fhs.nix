@@ -31,7 +31,7 @@ in
         gtk3 libdrm libgbm
         libGL libxfixes libxft
         libxkbcommon mesa pango
-      ] ++ (with pkgs.xorg; [
+      ] ++ (with pkgs; [
         # X11 Libraries
         libICE libSM libX11
         libXcomposite libXcursor libXdamage
@@ -83,7 +83,7 @@ in
         fontconfig freetype glib
         gtk2 gtk3 libGL
         libglvnd mesa
-      ] ++ (with pkgs.xorg; [
+      ] ++ (with pkgs; [
         # X11 Libraries
         libICE libSM libX11
         libxcb libXcomposite libXScrnSaver 
@@ -159,7 +159,7 @@ in
         #libsForQt5.qt5.qtbase 
         #libsForQt5.qt5.qttools 
         #xkeyboard_config
-      #] ++ (with pkgs.xorg; [
+      #] ++ (with pkgs; [
         # X11 Libraries
         #libICE libSM libX11
         #libxcb libXcomposite libXcursor

@@ -10,12 +10,12 @@ in
   home.packages = with pkgs;[
     arduino-ide
     freecad
-    jetbrains.clion
-    jetbrains.pycharm
     kicad
     kicadAddons.kikit
     octaveFull
     stm32cubemx
+    unstable-pkgs.jetbrains.clion
+    unstable-pkgs.jetbrains.pycharm
     unstable-pkgs.opencode
     unstable-pkgs.unityhub
   ];

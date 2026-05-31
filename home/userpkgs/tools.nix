@@ -11,6 +11,7 @@ in
     aria2
     imv
     unstable-pkgs.motrix-next
+    unstable-pkgs.pince
     mpv
     scrcpy
     speedtest-go

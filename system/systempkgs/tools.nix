@@ -25,6 +25,7 @@ in
     psutils
     ripgrep-all
     tree
+    usbutils
 
     # Archives
     p7zip

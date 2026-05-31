@@ -51,7 +51,7 @@ A declarative NixOS system configuration using Nix flakes, featuring a customize
 │   ├── programs/          # User programs
 │   ├── wallpapers/        # Wallpaper files
 │   └── userpkgs/          # User packages
-├── inputs/                # Local flake inputs
+│
 ├── overlays/              # Nixpkgs overlays
 │   └── local_apps/        # Custom local applications
 └── system/                # System-wide configuration

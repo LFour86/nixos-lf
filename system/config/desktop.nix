@@ -32,13 +32,15 @@ in
       defaultSession = "plasma";
       
       # GDM 
-      gdm = {
-        enable = true;
-        wayland = true;
-      };
+      #gdm = {
+        #enable = true;
+        #wayland = true;
+      #};
 
       # PLM 
-      #plasma-login-manager.enable = true;
+      plasma-login-manager = {
+        enable = true;
+      };
 
       # SDDM
       #sddm = {
@@ -105,9 +107,9 @@ in
     # Gnome extra ssettings
     #gnome-tweaks
     # Applications
-    #baobab
-    #nautilus
-    #nautilus-open-any-terminal
+    baobab
+    nautilus
+    nautilus-open-any-terminal
     gnome-calculator
     #gnome-software
     

@@ -25,27 +25,30 @@
   # Flatpak
   services.flatpak.enable = true;
 
-  # Music Player Deamon
+# Music Player Deamon
   services.mpd = {
     enable = true;
     user = "lfour";
-    musicDirectory = "/home/lfour/Music";
-    # Optional:
-    network.listenAddress = "any"; # if you want to allow non-localhost connections
-    startWhenNeeded = true; # systemd feature: only start MPD service upon connection to its socket
-    extraConfig = ''
-        audio_output {
-          type "pipewire"
-          name "PipeWire Output"
+    startWhenNeeded = true;
+    openFirewall = false;
+    settings = {
+      music_directory = "/home/lfour/Music";
+      bind_to_address = "any";
+      audio_output = [
+        {
+          type = "pipewire";
+          name = "PipeWire Output";
         }
-        audio_output {
-          type "fifo"
-          name "FIFO"
-          path "/tmp/mpd.fifo"
-          format "44100:16:2"
+        {
+          type = "fifo";
+          name = "FIFO";
+          path = "/tmp/mpd.fifo";
+          format = "44100:16:2";
         }
-      '';
+      ];
     };
+  };
+
   systemd.services.mpd.environment = {
     XDG_RUNTIME_DIR = "/run/user/1000";
   };
@@ -115,6 +118,9 @@
     
     # Prolific PL2303
     ATTRS{idVendor}=="067b", ATTRS{idProduct}=="2303", TAG+="uaccess"
+
+    # W-ELEMENTS CMSS-DAP
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="572a", MODE="0666"
 
     # ST-Link/V2, V2-1, V3
     ATTRS{idVendor}=="0483", ATTRS{idProduct}=="3748", TAG+="uaccess"

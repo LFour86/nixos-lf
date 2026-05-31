@@ -9,6 +9,7 @@ in
 {
   home.packages = with pkgs;[
     bilibili
+    minecraft-server
     sillytavern
   ];
 }

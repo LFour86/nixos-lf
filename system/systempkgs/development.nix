@@ -14,8 +14,10 @@ in
     coreutils-full
     devenv
     gnumake
+    nasm
     pkg-config
     pkgconf
+    qemu_full
     meson
     ninja
 
@@ -32,6 +34,7 @@ in
 
     # Android
     #unstable-pkgs.androidsdk
+    unstable-pkgs.android-tools
 
     # GTK3 && GTK4
     gtk3

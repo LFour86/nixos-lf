@@ -21,16 +21,16 @@ pkgs.appimageTools.wrapType2 {
      fcitx5-gtk
      xwayland
      xwayland-satellite
-     xorg.libX11
-     xorg.libXrandr
-     xorg.libXcursor
-     xorg.libXi
-     xorg.libXcomposite
-     xorg.libXdamage
-     xorg.libXfixes
-     xorg.libXScrnSaver
-     xorg.libXtst
-     xorg.libXext
+     libX11
+     libXrandr
+     libXcursor
+     libXi
+     libXcomposite
+     libXdamage
+     libXfixes
+     libXScrnSaver
+     libXtst
+     libXext
    ];
 
   extraInstallCommands = ''

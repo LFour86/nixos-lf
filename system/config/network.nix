@@ -21,12 +21,15 @@
     useRoutingFeatures = "both";
   };
 
+  # Resolved
   services.resolved = {
     enable = true;
-    domains = ["~."];
-    extraConfig = ''
-      DNSStubListenerExtra=udp:0.0.0.0:53
-    '';
+    settings = {
+      Resolve = {
+        Domains = ["~."];
+        DNSStubListenerExtra = "udp:0.0.0.0:53";
+      };
+    };
   };
 
   # Substituters mirrors
@@ -82,6 +85,9 @@
             # Libvirt
             iifname "virbr0" accept
 
+            # Minecraft-Server
+            tcp dport 25565 accept
+
             # Default reject
             reject with icmpx type admin-prohibited
         }
@@ -119,8 +125,48 @@
     '';
   };
 
+  # CrowdSec
+  #services.crowdsec = {
+    #enable = true;
+    #hub = {
+      #collections = [
+        #"crowdsecurity/sshd"
+        #"crowdsecurity/linux"
+      #];
+    #};
+    #localConfig.acquisitions = [
+      #{
+        #source = "journald";
+        #journalctl_filter = [ "_SYSTEMD_UNIT=sshd.service" ];
+        #labels.type = "syslog";
+      #}
+    #];
+  #};
+
+  #services.crowdsec-firewall-bouncer = {
+    #enable = true;
+    #registerBouncer.enable = true;
+    #settings = {
+      #mode = "nftables";
+    #};
+  #};
+
   # Fail2ban: intended for exposed SSH / servers
-  services.fail2ban.enable = false;
+  #services.fail2ban = {
+    #enable = true;
+    #jails = {
+      #sshd = {
+        #filter = "sshd";
+        #action = "nftables-allports";
+        #maxretry = 3;
+        #bantime = 3600;
+        #findtime = 600;
+        #settings = {
+          #backend = "systemd";
+        #};
+      #};
+    #};
+  #};
 
   # Avahi / mDNS (local discovery)
   services.avahi = {
@@ -134,6 +180,7 @@
   #};
 
   environment.systemPackages = with pkgs; [
+    crowdsec
     traceroute
   ];
 }

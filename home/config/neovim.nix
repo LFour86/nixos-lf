@@ -24,14 +24,14 @@
       nixd
       clang-tools
       pyright
-      nodePackages.typescript-language-server
-      nodePackages.vscode-langservers-extracted
+      typescript-language-server
+      vscode-langservers-extracted
       rust-analyzer
       gopls
     ];
 
     # Main Configuration
-    extraLuaConfig = ''
+    initLua = ''
       -- Basics
       vim.g.mapleader = " "
       vim.o.number = true
