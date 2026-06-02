@@ -15,7 +15,7 @@ A declarative NixOS system configuration using Nix flakes, featuring a customize
 
 ## Features
 
-- **Desktop Environment**: Niri Wayland compositor with Noctalia shell, GNOME and COSMIC 
+- **Desktop Environment**: KDE and Niri
 - **File System**: BTRFS with LUKS2
 - **Shell**: Nushell with custom config
 - **System Management**: Home Manager for user configuration
