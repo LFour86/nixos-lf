@@ -10,12 +10,15 @@ in
   home.packages = with pkgs;[
     aria2
     imv
+    media-downloader
+    mpv
     unstable-pkgs.motrix-next
     unstable-pkgs.pince
-    mpv
+    video-downloader
     scrcpy
     speedtest-go
     yazi
+    yt-dlp
   ];
 }
 

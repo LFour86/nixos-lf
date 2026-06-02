@@ -52,6 +52,7 @@ in
 
     # Python
     python314
+    uv
 
     # Node.js
     nodejs_24

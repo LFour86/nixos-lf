@@ -139,6 +139,12 @@
     };
   };
 
+  # Libvirt
+  systemd.services.libvirtd.serviceConfig = {
+    LoadCredential = "";
+    LoadCredentialEncrypted = "";
+  };
+
   # Flatpak
   systemd.services.flatpak-repo = {
     wantedBy = [ "multi-user.target" ];

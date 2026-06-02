@@ -37,6 +37,13 @@
   # Steam
   programs.steam = {
     enable = true;
+    extraCompatPackages = with pkgs; [
+      proton-ge-bin
+    ];
+    fontPackages = with pkgs; [
+      maple-mono.NF-CN
+    ];
+    extest.enable = true;
     gamescopeSession.enable = true;
     protontricks.enable = true;
   };
@@ -51,9 +58,11 @@
     libraries = with pkgs; [
       gcc
       llvm
+      libjpeg
       stdenv.cc.cc.lib
       udev
       wayland
+      zlib
     ];
   };
 }
