@@ -44,7 +44,6 @@
       maple-mono.NF-CN
     ];
     extest.enable = true;
-    gamescopeSession.enable = true;
     protontricks.enable = true;
   };
   hardware.steam-hardware.enable = true;
