@@ -114,6 +114,7 @@ in
     #gnome-software
     
     # KDE
+    haruna
     #kdePackages.dolphin
     #kdePackages.dolphin-plugins
     #kdePackages.wallpaper-engine-plugin

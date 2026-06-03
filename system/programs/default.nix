@@ -1,6 +1,9 @@
 {
   imports = [
-    ./fhs.nix
+    # Folders
+    ./fhs
+
+    # Files
     #./llm.nix
     ./programs.nix
     ./services.nix
