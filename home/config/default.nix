@@ -9,7 +9,7 @@
     # file
     ./neovim.nix
     ./nushell.nix
-    ./theme.nix
+    #./theme.nix
   ];
 }
 

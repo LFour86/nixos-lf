@@ -11,6 +11,7 @@
       # suggested subdirectory breakdown
       "/etc/NetworkManager/system-connections"
       "/etc/nixos"
+      "/etc/waydroid-extra"
 
       # If use SSH
       #"/etc/ssh"

@@ -72,8 +72,6 @@ in
         email = "LFour86@example.com";
       };
       init.defaultBranch = "main";
-      #http.proxy = "http://127.0.0.1:7897";
-      #https.proxy = "http://127.0.0.1:7897";
     };
   };
 }

@@ -64,6 +64,9 @@ in
 
     # Linux to Android
     unstable-pkgs.waydroid unstable-pkgs.waydroid-helper unstable-pkgs.nftables
+
+    # Linux to Linux
+    unstable-pkgs.distrobox 
   ];
 }
 
