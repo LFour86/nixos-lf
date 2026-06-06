@@ -10,6 +10,7 @@ in
   # Define user account.
   users = {
     mutableUsers = false;
+    groups.plugdev = {};
     users = {
       root = {
         hashedPasswordFile = "/persist/passwords/root";

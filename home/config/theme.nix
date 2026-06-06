@@ -36,9 +36,5 @@ in
       package = pkgs.adwaita-qt6;
     };
   };
-
-  home.packages = with pkgs;[
-    unstable-pkgs.dconf-editor
-  ];
 }
 

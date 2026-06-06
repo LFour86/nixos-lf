@@ -15,7 +15,7 @@ A declarative NixOS system configuration using Nix flakes, featuring a customize
 
 ## Features
 
-- **Desktop Environment**: KDE and Niri
+- **Desktop Environment**: See `system/config/desktop.nix`
 - **File System**: BTRFS with LUKS2
 - **Shell**: Nushell with custom config
 - **System Management**: Home Manager for user configuration

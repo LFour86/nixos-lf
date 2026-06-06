@@ -16,10 +16,10 @@ in
     gnome.gnome-keyring.enable = true;
     desktopManager = {
       # GNOME 
-      #gnome.enable = true;
+      gnome.enable = true;
 
       # KDE 
-      plasma6.enable = true;
+      #plasma6.enable = true;
 
       # Cosmic 
       #cosmic = {
@@ -29,18 +29,21 @@ in
       #};
     };
     displayManager = {
-      defaultSession = "plasma";
+      defaultSession = "gnome";
+
+      #cosmic-greeter = {
+        #enable = true;
+      #};
       
       # GDM 
-      #gdm = {
-        #enable = true;
-        #wayland = true;
-      #};
-
-      # PLM 
-      plasma-login-manager = {
+      gdm = {
         enable = true;
       };
+
+      # PLM 
+      #plasma-login-manager = {
+        #enable = true;
+      #};
 
       # SDDM
       #sddm = {
@@ -58,11 +61,17 @@ in
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-wlr
+      pkgs.kdePackages.xdg-desktop-portal-kde 
+      pkgs.xdg-desktop-portal-gnome
+    ];
   };
 
   services.udev.packages = with pkgs; [ 
-    #pkgs.gnome-settings-daemon
+    pkgs.gnome-settings-daemon
   ];
 
   # Colord
@@ -88,33 +97,49 @@ in
     #};
   #};
 
+  #environment.cosmic.excludePackages = with pkgs; [
+    #cosmic-player
+  #];
+
   environment.systemPackages = with pkgs; [ 
     # Gnome extensions
-    #gnomeExtensions.appindicator
-    #gnomeExtensions.astra-monitor
-    #gnomeExtensions.bluetooth-battery-meter
-    #gnomeExtensions.caffeine
-    #gnomeExtensions.clipboard-indicator
-    #gnomeExtensions.dash-to-dock
-    #gnomeExtensions.dim-completed-calendar-events
-    #gnomeExtensions.quick-settings-audio-devices-renamer
-    #gnomeExtensions.user-themes
-    #gnomeExtensions.workspace-indicator
+    gnomeExtensions.advanced-weather-companion
+    gnomeExtensions.appindicator
+    gnomeExtensions.astra-monitor
+    gnomeExtensions.bluetooth-battery-meter
+    gnomeExtensions.brightness-control-using-ddcutil
+    gnomeExtensions.caffeine
+    gnomeExtensions.clipboard-indicator
+    gnomeExtensions.coverflow-alt-tab
+    gnomeExtensions.dash-to-dock
+    gnomeExtensions.desktop-icons-ng-ding
+    gnomeExtensions.dim-completed-calendar-events
+    gnomeExtensions.emoji-copy
+    gnomeExtensions.force-quit
+    gnomeExtensions.just-perfection
+    gnomeExtensions.proxy-switcher
+    gnomeExtensions.quick-settings-audio-devices-renamer
+    gnomeExtensions.user-themes
+    gnomeExtensions.wifi-qrcode
+    gnomeExtensions.workspace-indicator
+    
     # Gnome windows themes
     pkgs.adwaita-icon-theme
     adwaita-qt
     adwaita-qt6
-    # Gnome extra ssettings
-    #gnome-tweaks
+
     # Applications
-    baobab
+    dconf-editor
+    ddcutil
+    gnome-software
+    gnome-tweaks
+    hydrapaper
     nautilus
     nautilus-open-any-terminal
-    gnome-calculator
-    #gnome-software
+    ptyxis
     
     # KDE
-    haruna
+    #haruna
     #kdePackages.dolphin
     #kdePackages.dolphin-plugins
     #kdePackages.wallpaper-engine-plugin

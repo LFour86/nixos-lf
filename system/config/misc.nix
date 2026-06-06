@@ -36,7 +36,6 @@
       nerd-fonts.jetbrains-mono
       nerd-fonts.ubuntu-mono
       nerd-fonts.ubuntu
-      wqy_zenhei
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
@@ -48,9 +47,9 @@
 
   # Required fallback to avoid GNOME/KDE fcitx5 segmentation bugs
   fonts.fontconfig.defaultFonts = {
-    sansSerif = [ "Noto Sans CJK SC" "WenQuanYi Zen Hei" ];
-    serif     = [ "Noto Serif CJK SC" ];
-    monospace = [ "Maple Mono NF" ];
+    sansSerif = [ "Maple Mono NF CN" ];
+    serif     = [ "Maple Mono NF CN" ];
+    monospace = [ "Maple Mono NF CN" ];
     emoji     = [ "Twitter Color Emoji" ];
   };
 

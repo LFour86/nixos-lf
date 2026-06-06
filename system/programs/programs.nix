@@ -40,6 +40,10 @@
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
     localNetworkGameTransfers.openFirewall = true;
+    extraPackages = with pkgs; [
+      cef-binary
+      fontconfig
+    ];
     extraCompatPackages = with pkgs; [
       proton-ge-bin
       dwproton-bin

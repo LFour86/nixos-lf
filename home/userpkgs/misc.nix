@@ -13,17 +13,17 @@ in
     (lib.hiPrio (writeShellScriptBin "wps" ''
       exec ${unstable-pkgs.wpsoffice-cn}/bin/wps \
         --force-device-scale-factor=1 \
-        QT_IM_MODULE=fcitx "$@"
+        "$@"
     ''))
     (lib.hiPrio (writeShellScriptBin "wpp" ''
       exec ${unstable-pkgs.wpsoffice-cn}/bin/wpp \
         --force-device-scale-factor=1 \
-        QT_IM_MODULE=fcitx "$@"
+        "$@"
     ''))
     (lib.hiPrio (writeShellScriptBin "et" ''
       exec ${unstable-pkgs.wpsoffice-cn}/bin/et \
         --force-device-scale-factor=1 \
-        QT_IM_MODULE=fcitx "$@"
+        "$@"
     ''))
 
     # Wine

@@ -2,6 +2,18 @@
 
 {
   environment.systemPackages = with pkgs; [
+    # Serial communication
+    cutecom
+    minicom
+    moserial
+    putty
+
+    # Simulate
+    qemu_full
+
+    # Assembly
+    nasm
+
     # Generic embedded
     gcc-arm-embedded
     openocd

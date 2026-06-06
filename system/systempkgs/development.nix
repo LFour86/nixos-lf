@@ -14,10 +14,8 @@ in
     coreutils-full
     devenv
     gnumake
-    nasm
     pkg-config
     pkgconf
-    qemu_full
     meson
     ninja
 
