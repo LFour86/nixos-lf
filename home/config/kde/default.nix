@@ -1,6 +1,6 @@
 {
   imports = [
-    ./fix-kde-desktop.nix 
+    #./fix-kde-desktop.nix 
   ];
 }
 

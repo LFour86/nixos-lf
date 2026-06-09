@@ -7,7 +7,6 @@
   # Enable Direnv
   programs.direnv.enable = true;
 
-  
   # Nix Index
   programs.nix-index = {
     enable = true;
@@ -55,22 +54,5 @@
     protontricks.enable = true;
   };
   hardware.steam-hardware.enable = true;
-
-  # Neovim
-  environment.variables.EDITOR = "nvim";
-
-  # Nix-ld: Run closed-source Binary
-  programs.nix-ld = {
-    enable = true;
-    libraries = with pkgs; [
-      gcc
-      llvm
-      libjpeg
-      stdenv.cc.cc.lib
-      udev
-      wayland
-      zlib
-    ];
-  };
 }
 

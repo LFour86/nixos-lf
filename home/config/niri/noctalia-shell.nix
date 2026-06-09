@@ -3,7 +3,7 @@
 {
   # Install package
   home.packages = with pkgs; [
-    inputs.noctalia-shell.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   # Configure options
@@ -597,7 +597,7 @@
       defaultWallpaper = "${../../wallpapers/Kafuu-Chino.png}";
       wallpapers = {
         "eDP-1" = "${../../wallpapers/Kafuu-Chino.png}";
-        "HDMI-A-1" = "${../../wallpapers/cocoa.png}";
+	"HDMI-A-1" = "${../../wallpapers/cocoa.png}";
       };
     };
   };

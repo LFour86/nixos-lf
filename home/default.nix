@@ -3,7 +3,7 @@
 {
   imports = [
     # Modules
-    inputs.noctalia-shell.homeModules.default
+    inputs.noctalia.homeModules.default
     
     # Home-manager module
     ./home-manager.nix

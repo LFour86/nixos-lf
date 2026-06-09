@@ -8,17 +8,17 @@ let
 in
 {
   home.packages = with pkgs;[
-    discord
+    #discord
     #unstable-pkgs.wechat-uos 
     #unstable-pkgs.wemeet
     telegram-desktop
-    (unstable-pkgs.qq.override {
-      commandLineArgs = [
-        "--ozone-platform=wayland"
-        "--enable-wayland-ime"
-        "--wayland-text-input-version=3"
-      ];
-    })
+    #(unstable-pkgs.qq.override {
+      #commandLineArgs = [
+        #"--ozone-platform=wayland"
+        #"--enable-wayland-ime"
+        #"--wayland-text-input-version=3"
+      #];
+    #})
   ];
 }
 

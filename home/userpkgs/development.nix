@@ -17,7 +17,7 @@ in
     unstable-pkgs.jetbrains.clion
     unstable-pkgs.jetbrains.pycharm
     unstable-pkgs.opencode
-    unstable-pkgs.unityhub
+    #unstable-pkgs.unityhub
   ];
 }
 

@@ -107,7 +107,6 @@ in
     gnomeExtensions.appindicator
     gnomeExtensions.astra-monitor
     gnomeExtensions.bluetooth-battery-meter
-    gnomeExtensions.brightness-control-using-ddcutil
     gnomeExtensions.caffeine
     gnomeExtensions.clipboard-indicator
     gnomeExtensions.coverflow-alt-tab

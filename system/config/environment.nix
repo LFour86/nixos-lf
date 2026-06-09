@@ -27,6 +27,8 @@
     #ALL_PROXY = "";
     #NO_PROXY = "";
   };
+  
+  environment.variables.EDITOR = "nvim";
 
   environment.extraOutputsToInstall = [ "dev" ];
 }
