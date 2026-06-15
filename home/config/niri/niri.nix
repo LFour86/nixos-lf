@@ -4,11 +4,6 @@
 
     // Autostart
     spawn-at-startup "noctalia-shell"
-    spawn-at-startup "wl-clipboard"
-    spawn-at-startup "clipman"
-    //spawn-at-startup "swww-daemon"
-    //spawn-at-startup "systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
-    //spawn-at-startup "systemctl" "--user" "start" "graphical-session.target"
 
     // General Settings
     prefer-no-csd

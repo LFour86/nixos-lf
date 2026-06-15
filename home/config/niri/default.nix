@@ -1,7 +1,7 @@
 {
   imports = [
     ./fuzzel.nix
-    ./noctalia-shell.nix
+    ./noctalia.nix
     ./niri.nix
     #./swayidle.nix
     #./wallpaper.nix

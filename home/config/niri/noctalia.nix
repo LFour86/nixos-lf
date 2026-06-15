@@ -13,7 +13,7 @@
       settingsVersion = 57;
       # Bar Configuration
       bar = {
-        barType = "simple";
+        barType = "framed";
         position = "top";
         monitors = [];
         density = "standard";
@@ -43,11 +43,12 @@
             { id = "plugin:network-indicator"; }
             { id = "Network"; displayMode = "onhover"; iconColor = "none"; textColor = "none"; }
             { id = "plugin:port-monitor"; }
-            { id = "plugin:ip-monitor"; }
-            { id = "plugin:air-quality"; }
-            { id = "plugin:latency-monitor"; }
+            { id = "plugin:mini-docker"; }
             { id = "Bluetooth"; displayMode = "onhover"; iconColor = "none"; textColor = "none"; }
             { id = "plugin:usb-drive-manager"; }
+            { id = "plugin:linux-wallpaperengine-controller"; }
+            { id = "plugin:screen-toolkit"; }
+            { id = "plugin:color-scheme-creator"; }
             { blacklist = []; chevronColor = "none"; colorizeIcons = false; drawerEnabled = true; hidePassive = false; id = "Tray"; pinned = []; }
           ];
           center = [
@@ -56,16 +57,14 @@
           right = [
             { id = "plugin:catwalk"; }
             { id = "plugin:privacy-indicator"; }
-            { id = "plugin:screen-toolkit"; }
-            { id = "plugin:color-scheme-creator"; }
-            { id = "plugin:linux-wallpaperengine-controller"; }
             { id = "plugin:assistant-panel"; }
             { id = "plugin:simple-notes"; }
             { id = "plugin:todo"; }
             { id = "plugin:clipper"; }
             { id = "plugin:timer"; }
             { clockColor = "none"; customFont = ""; formatHorizontal = "yyyy-MM-dd, HH:mm ddd"; formatVertical = "HH mm - dd MM"; id = "Clock"; tooltipFormat = "yyyy-MM-dd, HH:mm ddd"; useCustomFont = false; }
-            { deviceNativePath = ""; displayMode = "onhover"; hideIfIdle = false; hideIfNotDetected = true; id = "Battery"; showNoctaliaPerformance = false; showPowerProfiles = false; }
+            #{ deviceNativePath = ""; displayMode = "onhover"; hideIfIdle = false; hideIfNotDetected = true; id = "Battery"; showNoctaliaPerformance = false; showPowerProfiles = false; }
+            { id = "plugin:battery-monitor-plus"; }
           ];
         };
         mouseWheelAction = "none";
@@ -305,13 +304,13 @@
         dockType = "floating";
         backgroundOpacity = 1;
         floatingRatio = 1;
-        size = 1;
+        size = 1.5;
         onlySameOutput = true;
         monitors = [ "eDP-1" "HDMI-A-1" ];
         pinnedApps = [];
         colorizeIcons = false;
         showLauncherIcon = true;
-        launcherPosition = "end";
+        launcherPosition = "start";
         launcherUseDistroLogo = true;
         launcherIcon = "";
         launcherIconColor = "none";
@@ -576,6 +575,14 @@
           sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
         };
         latency-monitor = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        mini-docker = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        battery-monitor-plus = {
           enabled = true;
           sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
         };

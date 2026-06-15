@@ -159,7 +159,7 @@
         }
       }
     }
-
+    
     # Clear the proxy environment variables
     def --env proxy-off [] {
       hide-env http_proxy

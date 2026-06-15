@@ -9,6 +9,8 @@ in
 {
   home.packages = with pkgs;[
     arduino-ide
+    blender
+    davinci-resolve
     freecad
     kicad
     kicadAddons.kikit

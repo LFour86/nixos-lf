@@ -3,8 +3,11 @@
 {
   # Networking
   networking = {
-    hostName = "nixos";      # Define hostname.
-    networkmanager.enable = true;
+    hostName = "nixos";
+    networkmanager = {
+      enable = true;
+      wifi.powersave = false;
+    };
     resolvconf.enable = false;
     proxy = {
       default = "http://127.0.0.1:33332/";
@@ -27,6 +30,7 @@
     settings = {
       Resolve = {
         Domains = ["~."];
+        #DNS = [ "1.1.1.1" "1.0.0.1" ];
         DNSStubListenerExtra = "udp:0.0.0.0:53";
       };
     };
@@ -75,6 +79,10 @@
             # Tailscale
             udp dport 41641 accept
 
+	          # P2P
+            tcp dport 53317 accept
+            udp dport 53317 accept
+
             # Remote desktop protocols
             tcp dport { 3389, 5900, 47989 } accept        # RDP, VNC, Sunshine WebUI
             udp dport { 47998, 47999, 48000, 48010 } accept # Sunshine streaming ports
@@ -110,6 +118,12 @@
 
         chain output {
           type filter hook output priority 0; policy accept;
+
+          # Zapret: Divert outbound HTTP (80) and HTTPS/QUIC (443) to NFQUEUE
+          ip daddr != { 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16 } tcp dport { 80, 443 } counter queue num 200 bypass
+          ip daddr != { 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16 } udp dport 443 counter queue num 200 bypass
+          ip6 daddr != { fe80::/10, fc00::/7 } tcp dport { 80, 443 } counter queue num 200 bypass
+          ip6 daddr != { fe80::/10, fc00::/7 } udp dport 443 counter queue num 200 bypass
         }
       }
 
@@ -119,7 +133,7 @@
           type nat hook postrouting priority 100;
           oifname "enp4s0" ip saddr 192.168.122.0/24 masquerade
           oifname "wlo1"  ip saddr 192.168.122.0/24 masquerade
-         oifname "enp4s0" masquerade   # hotspot clients
+          oifname "enp4s0" masquerade   # hotspot clients
         }
       }
     '';
@@ -174,10 +188,68 @@
     nssmdns4 = true;
   };
 
-  #hosts
-  #networking.hosts = {
-    #"20.27.177.113" = ["github.com"];
-  #};
+  # Zapret
+  services.zapret = {
+    enable = true;
+    configureFirewall = false;
+    httpSupport = true;
+    udpSupport = true;
+    udpPorts = [ "443" ];
+    params = [
+      # Minimal DPI bypass, less aggressive
+      "--dpi-desync=fake"
+      "--dpi-desync-ttl=4"
+      "--dpi-desync-split-pos=1,midsld"
+
+      # --- risky options (can cause lag/packet loss) ---
+      # "--dpi-desync=fake,multisplit"
+      # "--dpi-desync-fooling=badseq"
+      # "--dpi-desync-repeats=5"
+    ];
+  };
+
+  # Kernel modules
+  boot.extraModprobeConfig = ''
+    options mt7921e disable_aspm=1
+  '';
+
+  # Kernel settings
+  boot.kernelModules = [ "tcp_bbr" ];
+  boot.kernel.sysctl = {
+    # BBR + fq for better throughput on lossy links
+    "net.core.default_qdisc" = "fq";
+    "net.ipv4.tcp_congestion_control" = "bbr";
+
+    # Cap buffers at 16 MiB to avoid bufferbloat
+    "net.core.rmem_max" = 16777216;
+    "net.core.wmem_max" = 16777216;
+    "net.core.rmem_default" = 262144;
+    "net.core.wmem_default" = 262144;
+
+    # TCP auto-tuning: max 16 MiB
+    "net.ipv4.tcp_rmem" = "4096 87380 16777216";
+    "net.ipv4.tcp_wmem" = "4096 65536 16777216";
+
+    # TCP Fast Open (client only, disable if unstable)
+    "net.ipv4.tcp_fastopen" = 1;
+
+    # Keep cwnd after idle (good for interactive use)
+    "net.ipv4.tcp_slow_start_after_idle" = 0;
+
+    # Slightly larger UDP buffers for QUIC/WebRTC
+    "net.ipv4.udp_rmem_min" = 16384;
+    "net.ipv4.udp_wmem_min" = 16384;
+
+    # ECN
+    "net.ipv4.tcp_ecn" = 1;
+
+    # Netdev
+    "net.core.netdev_max_backlog" = 16384;
+    "net.core.netdev_budget" = 600;
+    
+    # Optmem
+    "net.core.optmem_max" = 65536;
+  };
 
   environment.systemPackages = with pkgs; [
     crowdsec

@@ -113,6 +113,7 @@ in
     gnomeExtensions.dash-to-dock
     gnomeExtensions.desktop-icons-ng-ding
     gnomeExtensions.dim-completed-calendar-events
+    gnomeExtensions.docker
     gnomeExtensions.emoji-copy
     gnomeExtensions.force-quit
     gnomeExtensions.just-perfection

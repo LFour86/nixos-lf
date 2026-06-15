@@ -1,5 +1,4 @@
 { pkgs, ... }:
-
 let
   # Embedded development udev rules (high priority)
   embeddedRules = pkgs.writeTextDir "lib/udev/rules.d/50-embedded-devices.rules" ''
@@ -20,8 +19,9 @@ let
     ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea70", TAG+="uaccess"
 
     # CH340/CH341
-    ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", TAG+="uaccess"
-    ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="5523", TAG+="uaccess"
+    ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7522", TAG+="uaccess", GROUP="plugdev", MODE="0660"
+    ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", TAG+="uaccess", GROUP="plugdev", MODE="0660"
+    ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="5523", TAG+="uaccess", GROUP="plugdev", MODE="0660"
 
     # Prolific PL2303
     ATTRS{idVendor}=="067b", ATTRS{idProduct}=="2303", TAG+="uaccess"
@@ -85,7 +85,6 @@ in
       ];
     };
   };
-
   systemd.services.mpd.environment = {
     XDG_RUNTIME_DIR = "/run/user/1000";
   };
