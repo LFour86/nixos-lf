@@ -6,7 +6,7 @@
     hostName = "nixos";
     networkmanager = {
       enable = true;
-      dhcp = "internal";
+      #dhcp = "internal";
       wifi.powersave = false;
       settings = {
         connectivity = {
