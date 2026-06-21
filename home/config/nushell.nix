@@ -63,6 +63,7 @@
       color_config: $ayu_dark_theme
     }
 
+    $env.PATH = ($env.PATH | split row (char esep) | prepend ($env.HOME | path join ".local/bin"))
     $env.EDITOR = "nvim"
     $env.VISUAL = "nvim"
     $env.PROMPT_COMMAND_RIGHT = { "" }

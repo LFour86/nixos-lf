@@ -15,6 +15,7 @@ in
     unstable-pkgs.motrix-next
     unstable-pkgs.pince
     video-downloader
+    warp-terminal
     scrcpy
     speedtest-go
     yazi

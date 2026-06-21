@@ -46,6 +46,7 @@
       fontconfig 
       udev 
       zlib
+      zlib-ng
       libpng
       gtk3
       gtk4

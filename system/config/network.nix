@@ -6,12 +6,18 @@
     hostName = "nixos";
     networkmanager = {
       enable = true;
+      dhcp = "internal";
       wifi.powersave = false;
+      settings = {
+        connectivity = {
+          interval = 0;
+        };
+      };
     };
     resolvconf.enable = false;
     proxy = {
       default = "http://127.0.0.1:33332/";
-      noProxy = "127.0.0.1,localhost,::1,10.0.0.0/8,192.168.0.0/16,*.local,.ustc.edu.cn,cache.nixos.org";
+      noProxy = "127.0.0.1,localhost,::1,10.0.0.0/8,192.168.0.0/16,172.16.0.0/12,192.168.1.1,*.local";
     };
   };
 
@@ -79,13 +85,13 @@
             # Tailscale
             udp dport 41641 accept
 
-	          # P2P
+            # P2P
             tcp dport 53317 accept
             udp dport 53317 accept
 
             # Remote desktop protocols
-            tcp dport { 3389, 5900, 47989 } accept        # RDP, VNC, Sunshine WebUI
-            udp dport { 47998, 47999, 48000, 48010 } accept # Sunshine streaming ports
+            tcp dport { 3389, 5900, 47989 } accept  # RDP, VNC, Sunshine WebUI
+            udp dport { 47998, 47999, 48000, 48010 } accept  # Sunshine streaming ports
 
             # SSH (uncomment if needed)
             # tcp dport 22 accept
@@ -119,7 +125,18 @@
         chain output {
           type filter hook output priority 0; policy accept;
 
-          # Zapret: Divert outbound HTTP (80) and HTTPS/QUIC (443) to NFQUEUE
+          # Direct to router
+          ip daddr 192.168.1.1 accept
+        
+          # All private networks
+          ip daddr { 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16 } accept
+          ip6 daddr { fe80::/10, fc00::/7 } accept
+
+          # Localhost and link-local
+          ip daddr 127.0.0.0/8 accept
+          ip6 daddr ::1 accept
+
+          # Zapret diversion ONLY for real internet traffic
           ip daddr != { 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16 } tcp dport { 80, 443 } counter queue num 200 bypass
           ip daddr != { 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16 } udp dport 443 counter queue num 200 bypass
           ip6 daddr != { fe80::/10, fc00::/7 } tcp dport { 80, 443 } counter queue num 200 bypass
@@ -215,6 +232,15 @@
 
   # Kernel settings
   boot.kernelModules = [ "tcp_bbr" ];
+  
+  boot.kernelParams = [
+    # Disable Active State Power Management (ASPM) for the onboard wired network card (PCIe)
+    "pcie_aspm=off"
+  
+    # Disable USB auto-suspend
+    "usbcore.autosuspend=-1"
+  ];
+  
   boot.kernel.sysctl = {
     # BBR + fq for better throughput on lossy links
     "net.core.default_qdisc" = "fq";
