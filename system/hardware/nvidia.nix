@@ -14,6 +14,8 @@
       libvdpau
       libvdpau-va-gl
       nvidia-vaapi-driver
+      egl-wayland
+      egl-wayland2
     ];
     extraPackages32 = with pkgs; [
       libva 

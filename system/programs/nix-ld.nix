@@ -7,8 +7,11 @@
     libraries = with pkgs; [
       stdenv.cc.cc.lib 
       glib 
-      gtk3 
-      libGL 
+      gtk3
+      libusb1
+      libGL
+      libGLU
+      libGLX
       libxcb 
       libxcb-wm 
       libxcb-util

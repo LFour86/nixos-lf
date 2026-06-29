@@ -35,18 +35,18 @@
   };
 
   # ClamAV
-  #services.clamav = {
-    #daemon.enable = true;
-    #scanner.enable = true;
-    #updater.enable = true;
-    #updater.interval = "daily";
+  services.clamav = {
+    daemon.enable = false;
+    scanner.enable = false;
+    updater.enable = true;
+    updater.interval = "daily";
     #fangfrisch.enable = true;
     #clamonacc.enable = true;
     #daemon.settings = {
       #OnAccessPrevention = true;
       #OnAccessIncludePath = "/home/lfour/Downloads";
     #};
-  #};
+  };
 
   # Firejail
   programs.firejail = {

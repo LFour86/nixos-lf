@@ -49,7 +49,7 @@ in
     dotnet-runtime
 
     # Python
-    python314
+    python313
     uv
 
     # Node.js
